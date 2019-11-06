@@ -2,6 +2,8 @@ package DungeonCrawler;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.function.Consumer;
+
 @Setter
 @Getter
 public abstract class Item {

@@ -3,6 +3,8 @@ package DungeonCrawler;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.function.Consumer;
+
 @Setter
 @Getter
 public class Spell {
@@ -12,12 +14,14 @@ public class Spell {
     private int damage;
     private String attackCry;
     private String name;
+    private Consumer<Entity> effectFunction;
 
-    public Spell(int cost, int damage, String attackCry, String name){
+    public Spell(int cost, int damage, String attackCry, String name, Consumer<Entity> effectFunction){
         this.cost = cost;
         this.damage = damage;
         this.attackCry = attackCry;
         this.name = name;
+        this.effectFunction = effectFunction;
     }
 
     public boolean fire(Entity opponent){
@@ -26,7 +30,7 @@ public class Spell {
         }
         else{
             System.out.println(attackCry);
-            opponent.setHp(opponent.getHp()-damage);
+            effectFunction.accept(opponent);
             user.setMp(user.getMp()-cost);
             return true;
         }

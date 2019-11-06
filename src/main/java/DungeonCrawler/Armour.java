@@ -1,6 +1,7 @@
 package DungeonCrawler;
 
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class Armour extends Item {
 
