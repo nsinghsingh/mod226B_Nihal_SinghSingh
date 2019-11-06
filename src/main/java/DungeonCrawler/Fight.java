@@ -1,5 +1,7 @@
 package DungeonCrawler;
 
+import DungeonCrawler.Spells.Spell;
+
 import java.util.ArrayList;
 
 public class Fight extends DungeonCrawlerController {
@@ -23,7 +25,7 @@ public class Fight extends DungeonCrawlerController {
         if ("2".equals(input)) {
             Entity opponent = player.targetEnemy(enemies);
             Spell currentSpell = player.chooseSpell(player.spells);
-            hasActed = currentSpell.fire(opponent);
+            hasActed = currentSpell.fire(opponent, player);
         } else if ("3".equals(input)) {
             EnemyBasic opponent;
             opponent = player.targetEnemy(enemies);
@@ -31,8 +33,9 @@ public class Fight extends DungeonCrawlerController {
         } else if ("4".equals(input)) {
             hasActed = player.run(currentRoom);
         } else if ("5".equals(input)) {
+            Entity opponent = player.targetEnemy(enemies);
             Item item = player.chooseItem();
-            hasActed = item.use(player);
+            hasActed = item.use(player, opponent);
             if (hasActed) {
                 player.getItems().remove(item);
             }

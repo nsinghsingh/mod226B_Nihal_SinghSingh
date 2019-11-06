@@ -1,5 +1,6 @@
 package DungeonCrawler;
 
+import DungeonCrawler.Spells.Spell;
 import lombok.Getter;
 import lombok.Setter;
 

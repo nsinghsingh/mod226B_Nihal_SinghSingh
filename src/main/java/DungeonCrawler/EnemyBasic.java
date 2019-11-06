@@ -1,5 +1,7 @@
 package DungeonCrawler;
 
+import DungeonCrawler.Spells.Spell;
+
 import java.util.ArrayList;
 
 public class EnemyBasic extends Entity {

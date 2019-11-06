@@ -13,6 +13,6 @@ public abstract class Item {
     protected Entity user;
     protected String effect;
 
-    public abstract boolean use(Entity user);
+    public abstract boolean use(Entity user, Entity opponent);
 
 }

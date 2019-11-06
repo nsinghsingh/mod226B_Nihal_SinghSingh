@@ -15,7 +15,7 @@ public class Armour extends Item {
         this.armourPiece = armourPiece;
     }
 
-    public boolean use(Entity user) {
+    public boolean use(Entity user, Entity opponent) {
         Item[] equipment;
         Player player;
         try {
