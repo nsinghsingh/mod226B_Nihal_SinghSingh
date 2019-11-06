@@ -18,7 +18,7 @@ public class TicTacToeAI {
                     currentPlayer = 1;
                 }
                 depth += 1;
-                score += calculateScore(copy) - depth;
+                score += calculateScore(copy , depth);
                 calculateMove(copy, depth, currentPlayer);
                 depth -= 1;
                 if (depth == 1) {
@@ -33,37 +33,37 @@ public class TicTacToeAI {
         }
     }
 
-    public int calculateScore(String[][] squares) {
+    public int calculateScore(String[][] squares, int depth) {
         for (int i = 0; i < 3; i++) {
             if (squares[i][0].equals(squares[i][1]) && squares[i][0].equals(squares[i][2]) && !squares[i][0].equals("")) {
                 if (squares[i][0].equals("X")) {
-                    return -10;
+                    return -10 * (9-depth);
                 } else {
-                    return 10;
+                    return 10 - depth;
                 }
             }
         }
         for (int i = 0; i < 3; i++) {
             if (squares[0][i].equals(squares[1][i]) && squares[0][i].equals(squares[2][i]) && !squares[0][i].equals("")) {
                 if (squares[i][0].equals("X")) {
-                    return -10;
+                    return -10 * (9-depth);
                 } else {
-                    return 10;
+                    return 10 - depth;
                 }
             }
         }
         if (squares[0][0].equals(squares[1][1]) && squares[0][0].equals(squares[2][2]) && !squares[0][0].equals("")) {
             if (squares[0][0].equals("X")) {
-                return -10;
+                return -10 * (9-depth);
             } else {
-                return 10;
+                return 10 - depth;
             }
         }
         if (squares[2][0].equals(squares[1][1]) && squares[2][0].equals(squares[0][2]) && !squares[2][0].equals("")) {
             if (squares[2][0].equals("X")) {
-                return -10;
+                return -10 * (9-depth);
             } else {
-                return 10;
+                return 10 - depth;
             }
         }
         return 0;
