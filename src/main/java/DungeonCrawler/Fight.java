@@ -16,7 +16,7 @@ public class Fight extends DungeonCrawlerController {
 
     public void displayOptions() {
         boolean hasActed;
-        System.out.println("1.Health = " + player.getHp() + " ");
+        System.out.print("1.Health = " + player.getHp() + " ");
         System.out.print("2.Magic = " + player.getMp() + " ");
         System.out.print("3.Attack ");
         System.out.print("4.Run ");
@@ -28,8 +28,7 @@ public class Fight extends DungeonCrawlerController {
             currentSpell.setUser(player);
             hasActed = currentSpell.fire(opponent);
         } else if ("3".equals(input)) {
-            Entity opponent;
-            opponent = player.targetEnemy(enemies);
+            Entity opponent = player.targetEnemy(enemies);
             hasActed = player.attack(opponent);
         } else if ("4".equals(input)) {
             hasActed = player.run(currentRoom);
@@ -54,21 +53,16 @@ public class Fight extends DungeonCrawlerController {
     }
 
     public void isFighting() {
-        if (enemies.size() <= 0) {
-            Normal normal = new Normal(player, currentRoom);
-            normal.displayOptions();
+        if (player.getHp() <= 0) {
+            gameOver();
         } else {
-            if (player.getHp() <= 0){
-                gameOver();
-            }
-            else {
-                System.out.println("You are fighting some monsters. What would you like to do?");
-                displayOptions();
-            }
+            System.out.println("You are fighting some monsters. What would you like to do?");
+            displayOptions();
         }
     }
 
-    public void gameOver(){
+
+    public void gameOver() {
         System.out.println("You died :(");
         player = null;
     }

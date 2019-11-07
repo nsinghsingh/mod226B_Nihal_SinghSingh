@@ -2,6 +2,8 @@ package DungeonCrawler.Spells;
 
 import DungeonCrawler.Entity;
 
+import java.util.Scanner;
+
 public class SpellHeal extends Spell {
 
     public SpellHeal() {
@@ -24,7 +26,9 @@ public class SpellHeal extends Spell {
         if (user.getMp() < cost) {
             return false;
         } else {
-            System.out.println(attackCry);
+            System.out.print(attackCry);
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
             user.setHp(user.getHp() + value);
             user.setMp(user.getMp() - cost);
             return true;

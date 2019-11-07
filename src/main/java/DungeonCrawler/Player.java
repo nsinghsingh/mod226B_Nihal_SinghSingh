@@ -31,10 +31,13 @@ public class Player extends Entity {
 
     public void getAttacked(int damage) {
         damage -= defense;
-        if (damage < 0){
+        if (damage < 0) {
             damage = 0;
         }
-        System.out.println("You took " + damage + " damage!");
+        System.out.print("You took " + damage + " damage!");
+        hp -= damage;
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
     }
 
     public boolean attack(Entity opponent) {
@@ -55,12 +58,12 @@ public class Player extends Entity {
         System.out.println("");
         Entity currentEnemy;
         Scanner scanner = new Scanner(System.in);
-        if (scanner.nextLine() != null) {
-            currentEnemy = enemies.get(scanner.nextInt() - 1);
-        } else {
+        int choice = scanner.nextInt();
+        try {
+            currentEnemy = enemies.get(choice - 1);
+        } catch (Exception e) {
             currentEnemy = enemies.get(0);
         }
-
         return currentEnemy;
     }
 
@@ -72,9 +75,10 @@ public class Player extends Entity {
         System.out.println("");
         Spell currentSpell;
         Scanner scanner = new Scanner(System.in);
-        if (scanner.nextLine() != null) {
-            currentSpell = spells.get(scanner.nextInt() - 1);
-        } else {
+        int choice = scanner.nextInt();
+        try {
+            currentSpell = spells.get(choice - 1);
+        } catch (Exception e) {
             currentSpell = spells.get(0);
         }
         return currentSpell;
@@ -88,9 +92,10 @@ public class Player extends Entity {
         System.out.println("");
         Item currentItem;
         Scanner scanner = new Scanner(System.in);
-        if (scanner.nextLine() != null) {
-            currentItem = items.get(scanner.nextInt() - 1);
-        } else {
+        int choice = scanner.nextInt();
+        try {
+            currentItem = items.get(choice - 1);
+        } catch (Exception e) {
             currentItem = items.get(0);
         }
         return currentItem;
@@ -114,28 +119,28 @@ public class Player extends Entity {
 
     public void move(String direction, Room room) {
         int id = room.getId();
-        dungeon[id / 3][id % 3] = room;
+        dungeon[id / 5][id % 5] = room;
         if ("up".equals(direction)) {
             try {
-                currentroom = dungeon[(id / 3) - 1][id % 3];
+                currentroom = dungeon[(id / 5) - 1][id % 5];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
         } else if ("down".equals(direction)) {
             try {
-                currentroom = dungeon[(id / 3) + 1][id % 3];
+                currentroom = dungeon[(id / 5) + 1][id % 5];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
         } else if ("left".equals(direction)) {
             try {
-                currentroom = dungeon[id / 3][(id % 3) - 1];
+                currentroom = dungeon[id / 5][(id % 5) - 1];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
         } else if ("right".equals(direction)) {
             try {
-                currentroom = dungeon[id / 3][(id % 3) + 1];
+                currentroom = dungeon[id / 5][(id % 5) + 1];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
@@ -144,11 +149,17 @@ public class Player extends Entity {
 
     public void loot() {
         Scanner scanner = new Scanner(System.in);
-        for (Item item : currentroom.getLoot()) {
-            System.out.println("You found a " + item.getName());
+        if (currentroom.getLoot().size() > 0) {
+            for (Item item : currentroom.getLoot()) {
+                System.out.println("You found a " + item.getName());
+                scanner.nextLine();
+                items.add(item);
+                currentroom.getLoot().remove(item);
+            }
+        }
+        else{
+            System.out.println("You found nothing :(");
             scanner.nextLine();
-            items.add(item);
-            currentroom.getLoot().remove(item);
         }
     }
 }

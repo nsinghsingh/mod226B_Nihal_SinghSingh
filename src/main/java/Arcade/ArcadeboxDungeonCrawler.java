@@ -16,13 +16,13 @@ public class ArcadeboxDungeonCrawler {
     private int level = 1;
     private Player player;
 
-    public void start(){
+    public void start() {
         System.out.print(intro);
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         System.out.println("What is your name?");
         String name = scanner.nextLine();
-        switch (level){
+        switch (level) {
             case 1:
                 DungeonTutorial level = new DungeonTutorial();
                 ArrayList<Item> items = new ArrayList<>();
@@ -33,17 +33,26 @@ public class ArcadeboxDungeonCrawler {
                 spells.add(level.registerSpells().get("dab"));
                 spells.add(level.registerSpells().get("rest"));
                 player = new Player(100, 100, 10, name, spells, items, level.generateDungeon());
+                player.setCurrentroom(player.getDungeon()[0][0]);
         }
 
     }
 
-    public void run(){
-        beginning.isFighting();
+    public void run() {
+        while (true) {
+            beginning.setCurrentRoom(player.getCurrentroom());
+            beginning.isFighting();
+            if (player.getHp() <= 0){
+                beginning.isFighting();
+                break;
+            }
+        }
     }
 
     public static void main(String[] args) {
         ArcadeboxDungeonCrawler dungeon = new ArcadeboxDungeonCrawler();
         dungeon.start();
+        dungeon.beginning = new Normal(dungeon.player, dungeon.player.getCurrentroom());
         dungeon.run();
     }
 

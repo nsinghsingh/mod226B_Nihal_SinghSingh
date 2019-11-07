@@ -2,6 +2,8 @@ package DungeonCrawler.Spells;
 
 import DungeonCrawler.Entity;
 
+import java.util.Scanner;
+
 public class SpellBeachSlap extends Spell{
 
     public SpellBeachSlap() {
@@ -23,7 +25,9 @@ public class SpellBeachSlap extends Spell{
         if (user.getMp() < cost) {
             return false;
         } else {
-            System.out.println(attackCry);
+            System.out.print(attackCry);
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
             opponent.getAttacked(value);
             user.setMp(user.getMp() - cost);
             return true;

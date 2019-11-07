@@ -23,19 +23,19 @@ public class DungeonTutorial {
         registerItems();
         Random random = new Random();
         for (int i = 0; i < 24; i++) {
-            dungeon[i / 3][i % 3] = new Room();
-            for (int j = 0; j <= random.nextInt(itemsPerRoom + 1); j++) {
-                int index = random.nextInt(items.size() + 1);
+            dungeon[i / 5][i % 5] = new Room(i);
+            for (int j = 0; j <= random.nextInt(itemsPerRoom ); j++) {
+                int index = random.nextInt(items.size());
                 Object[] allItems = items.values().toArray();
-                dungeon[i / 3][i % 3].getLoot().add((Item) allItems[index]);
+                dungeon[i / 5][i % 5].getLoot().add((Item) allItems[index]);
             }
-            for (int j = 0; j <= random.nextInt(enemiesPerRoom + 1); j++) {
-                int index = random.nextInt(enemies.size() + 1);
+            for (int j = 0; j <= random.nextInt(enemiesPerRoom); j++) {
+                int index = random.nextInt(enemies.size());
                 Object[] allEnemies = enemies.values().toArray();
-                dungeon[i / 3][i % 3].getEnemies().add((Entity) allEnemies[index]);
+                dungeon[i / 5][i % 5].getEnemies().add((Entity) allEnemies[index]);
             }
         }
-        Room bossRoom = new Room();
+        Room bossRoom = new Room(25);
         bossRoom.getLoot().add(items.get("hp"));
         bossRoom.getLoot().add(items.get("hp"));
         bossRoom.getLoot().add(items.get("mp"));
@@ -77,14 +77,15 @@ public class DungeonTutorial {
         newSpell.add(spells.get("heal"));
         enemies.put("tutorial", new EnemyBasic(20, 10, 10, "tutorial", newSpell));
         newSpell.clear();
+        /*
         newSpell.add(spells.get("dab"));
-        enemies.put("tutorialSenior", new EnemyBasic(40, 20, 20, "tutorial senior", newSpell));
+        enemies.put("tutorialSenior", new EnemyBasic(40, 20, 15, "tutorial senior", newSpell));
         newSpell.clear();
         newSpell.add(spells.get("banana"));
-        enemies.put("tutorialChief", new EnemyBasic(60, 30, 30, "tutorial chief", newSpell));
+        enemies.put("tutorialChief", new EnemyBasic(60, 30, 20, "tutorial chief", newSpell));
         newSpell.clear();
         newSpell.add(spells.get("slap"));
-        enemies.put("tutorialBoss", new EnemyBasic(80, 40, 40, "tutorial boss", newSpell));
+        enemies.put("tutorialBoss", new EnemyBasic(80, 40, 25, "tutorial boss", newSpell));
         newSpell.clear();
         newSpell.add(spells.get("influencer"));
         enemies.put("tutorialPresident", new EnemyBasic(100, 50, 50, "tutorial president", newSpell));
@@ -94,6 +95,7 @@ public class DungeonTutorial {
         newSpell.add(spells.get("bigHeal"));
         newSpell.add(spells.get("rest"));
         enemies.put("tutorialGod", new EnemyBasic(120, 60, 60, "tutorial god", newSpell));
+        */
         return enemies;
     }
 }

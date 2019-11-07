@@ -25,7 +25,7 @@ public class SpellBlackHole extends Spell{
         if (user.getMp() < cost) {
             return false;
         } else {
-            System.out.println(attackCry);
+            System.out.print(attackCry);
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
             opponent.getAttacked(value);

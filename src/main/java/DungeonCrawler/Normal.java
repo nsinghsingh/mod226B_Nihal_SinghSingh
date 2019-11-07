@@ -14,13 +14,14 @@ public class Normal extends DungeonCrawlerController{
         System.out.print("2.Magic = " + player.getMp() + " ");
         System.out.print("3.Move ");
         System.out.println("4.Loot");
-        if (scanner.nextLine().equals("3"))
+        String input = scanner.nextLine();
+        if (input.equals("3"))
         {
             System.out.println("Which way do you want to go? Up, down, left or right?");
-            String input = scanner.nextLine();
+            input = scanner.nextLine();
             player.move(input, currentRoom);
         }
-        else if (scanner.nextLine().equals("4"))
+        else if (input.equals("4"))
         {
             player.loot();
         }
@@ -35,7 +36,7 @@ public class Normal extends DungeonCrawlerController{
         if (currentRoom.getEnemies().size() > 0)
         {
             Fight fight = new Fight(player, currentRoom);
-            fight.displayOptions();
+            fight.isFighting();
         }
         else
         {

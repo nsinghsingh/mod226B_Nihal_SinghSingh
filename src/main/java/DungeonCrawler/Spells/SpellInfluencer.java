@@ -3,6 +3,7 @@ package DungeonCrawler.Spells;
 import DungeonCrawler.Entity;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class SpellInfluencer extends Spell{
 
@@ -29,10 +30,12 @@ public class SpellInfluencer extends Spell{
         if (user.getMp() < cost) {
             return false;
         } else {
-            System.out.println(attackCry);
+            System.out.print(attackCry);
             Random random = new Random();
             for (int i = 0; i < random.nextInt(hits); i++) {
-                System.out.println((i+1) + " hit(s)");
+                System.out.print((i+1) + " hit(s)");
+                Scanner scanner = new Scanner(System.in);
+                String input = scanner.nextLine();
                 opponent.getAttacked(value/hits);
             }
             user.setMp(user.getMp() - cost);

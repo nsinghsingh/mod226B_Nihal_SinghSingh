@@ -5,6 +5,7 @@ import DungeonCrawler.Spells.Spell;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class EnemyBasic extends Entity {
 
@@ -22,7 +23,10 @@ public class EnemyBasic extends Entity {
         if (damage < 0) {
             damage = 0;
         }
-        System.out.println(name + " took " + damage + " damage!");
+        System.out.print(name + " took " + damage + " damage!");
+        hp -= damage;
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
     }
 
     public boolean attack(Entity opponent) {
@@ -30,12 +34,17 @@ public class EnemyBasic extends Entity {
         if (random.nextInt(100) > 30) {
             opponent.getAttacked(attack);
             return true;
-        }
-        else{
-            int index = random.nextInt(spells.size());
-            Spell currentSpell = spells.get(index);
-            currentSpell.setUser(this);
-            return currentSpell.fire(opponent);
+        } else {
+            if (spells.size() > 0) {
+                int index = random.nextInt(spells.size());
+                Spell currentSpell = spells.get(index);
+                currentSpell.setUser(this);
+                return currentSpell.fire(opponent);
+            }
+            else{
+                opponent.getAttacked(attack);
+                return true;
+            }
         }
     }
 }

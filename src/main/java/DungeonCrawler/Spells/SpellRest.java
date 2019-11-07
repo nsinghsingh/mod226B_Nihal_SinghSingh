@@ -2,6 +2,8 @@ package DungeonCrawler.Spells;
 
 import DungeonCrawler.Entity;
 
+import java.util.Scanner;
+
 public class SpellRest extends Spell {
 
     public SpellRest() {
@@ -21,6 +23,9 @@ public class SpellRest extends Spell {
     @Override
     public boolean fire(Entity opponent) {
         user.setMp(user.getMp() + value);
+        System.out.print(attackCry);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
         return true;
     }
 }
