@@ -1,8 +1,10 @@
-package DungeonCrawler;
+package DungeonCrawler.Enemies;
 
+import DungeonCrawler.Entity;
 import DungeonCrawler.Spells.Spell;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class EnemyBasic extends Entity {
 
@@ -17,14 +19,23 @@ public class EnemyBasic extends Entity {
 
     public void getAttacked(int damage) {
         damage -= defense;
-        if (damage < 0){
+        if (damage < 0) {
             damage = 0;
         }
         System.out.println(name + " took " + damage + " damage!");
     }
 
     public boolean attack(Entity opponent) {
-        opponent.getAttacked(attack);
-        return true;
+        Random random = new Random();
+        if (random.nextInt(100) > 30) {
+            opponent.getAttacked(attack);
+            return true;
+        }
+        else{
+            int index = random.nextInt(spells.size());
+            Spell currentSpell = spells.get(index);
+            currentSpell.setUser(this);
+            return currentSpell.fire(opponent);
+        }
     }
 }

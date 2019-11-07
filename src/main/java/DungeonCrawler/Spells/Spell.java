@@ -11,9 +11,9 @@ public abstract class Spell {
     protected Entity user;
     protected int cost;
 
-    protected int damage;
+    protected int value;
     protected String attackCry;
     protected String name;
 
-    public abstract boolean fire(Entity opponent, Entity user);
+    public abstract boolean fire(Entity opponent);
 }

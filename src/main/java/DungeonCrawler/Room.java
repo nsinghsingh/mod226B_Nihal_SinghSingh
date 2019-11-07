@@ -10,6 +10,6 @@ import java.util.ArrayList;
 public class Room {
 
     private int id;
-    private ArrayList<EnemyBasic> enemies;
+    private ArrayList<Entity> enemies;
     private ArrayList<Item> loot;
 }

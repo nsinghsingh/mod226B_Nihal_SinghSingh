@@ -8,28 +8,27 @@ public class SpellBlackHole extends Spell{
 
     public SpellBlackHole() {
         this.cost = 1;
-        this.damage = 100;
+        this.value = 100;
         this.attackCry = "Be reduced to atoms";
         this.name = "Universal finisher";
     }
 
-    public SpellBlackHole(Entity user, int cost, int damage, String attackCry, String name) {
-        this.user = user;
+    public SpellBlackHole(int cost, int damage, String attackCry, String name) {
         this.cost = cost;
-        this.damage = damage;
+        this.value = damage;
         this.attackCry = attackCry;
         this.name = name;
     }
 
     @Override
-    public boolean fire(Entity opponent, Entity user) {
+    public boolean fire(Entity opponent) {
         if (user.getMp() < cost) {
             return false;
         } else {
             System.out.println(attackCry);
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
-            opponent.getAttacked(damage);
+            opponent.getAttacked(value);
             user.setMp(user.getMp() - cost);
             return true;
         }

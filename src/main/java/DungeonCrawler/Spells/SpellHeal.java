@@ -6,27 +6,26 @@ public class SpellHeal extends Spell {
 
     public SpellHeal() {
         this.cost = 10;
-        this.damage = 14;
+        this.value = 14;
         this.attackCry = "HEAAAAAAAAAAAAAAAAAL!";
         this.name = "Healing Scream";
     }
 
-    public SpellHeal(Entity user, int cost, int damage, String attackCry, String name) {
-        this.user = user;
+    public SpellHeal(int cost, int damage, String attackCry, String name) {
         this.cost = cost;
-        this.damage = damage;
+        this.value = damage;
         this.attackCry = attackCry;
         this.name = name;
     }
 
 
     @Override
-    public boolean fire(Entity opponent, Entity user) {
+    public boolean fire(Entity opponent) {
         if (user.getMp() < cost) {
             return false;
         } else {
             System.out.println(attackCry);
-            user.setHp(user.getHp() + damage);
+            user.setHp(user.getHp() + value);
             user.setMp(user.getMp() - cost);
             return true;
         }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Fight extends DungeonCrawlerController {
 
-    private ArrayList<EnemyBasic> enemies;
+    private ArrayList<Entity> enemies;
 
     public Fight(Player player, Room currentRoom) {
         setPlayer(player);
@@ -25,9 +25,10 @@ public class Fight extends DungeonCrawlerController {
         if ("2".equals(input)) {
             Entity opponent = player.targetEnemy(enemies);
             Spell currentSpell = player.chooseSpell(player.spells);
-            hasActed = currentSpell.fire(opponent, player);
+            currentSpell.setUser(player);
+            hasActed = currentSpell.fire(opponent);
         } else if ("3".equals(input)) {
-            EnemyBasic opponent;
+            Entity opponent;
             opponent = player.targetEnemy(enemies);
             hasActed = player.attack(opponent);
         } else if ("4".equals(input)) {

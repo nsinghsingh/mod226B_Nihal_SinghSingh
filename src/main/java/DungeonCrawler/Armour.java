@@ -7,10 +7,9 @@ public class Armour extends Item {
 
     private int armourPiece;
 
-    public Armour(String name, int value, Entity user, String effect, int armourPiece) {
+    public Armour(String name, int value, String effect, int armourPiece) {
         this.name = name;
         this.value = value;
-        this.user = user;
         this.effect = effect;
         this.armourPiece = armourPiece;
     }

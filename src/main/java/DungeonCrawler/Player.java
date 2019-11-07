@@ -46,14 +46,14 @@ public class Player extends Entity {
         return true;
     }
 
-    public EnemyBasic targetEnemy(ArrayList<EnemyBasic> enemies) {
+    public Entity targetEnemy(ArrayList<Entity> enemies) {
 
         System.out.println("Which enemy will you attack?");
         for (int i = 0; i < enemies.size(); i++) {
             System.out.print((i + 1) + ". " + enemies.get(i).getName() + "  ");
         }
         System.out.println("");
-        EnemyBasic currentEnemy;
+        Entity currentEnemy;
         Scanner scanner = new Scanner(System.in);
         if (scanner.nextLine() != null) {
             currentEnemy = enemies.get(scanner.nextInt() - 1);
@@ -67,7 +67,7 @@ public class Player extends Entity {
     public Spell chooseSpell(ArrayList<Spell> spells) {
         System.out.println("Which spell will you use?");
         for (int i = 0; i < spells.size(); i++) {
-            System.out.print((i + 1) + ". " + spells.get(i).getName() + " (" + spells.get(i).getDamage() + " damage, " + spells.get(i).getCost() + " magic)  ");
+            System.out.print((i + 1) + ". " + spells.get(i).getName() + " (" + spells.get(i).getValue() + " damage, " + spells.get(i).getCost() + " magic)  ");
         }
         System.out.println("");
         Spell currentSpell;
