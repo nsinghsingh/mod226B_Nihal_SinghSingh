@@ -31,7 +31,8 @@ public class EnemyBasic extends Entity {
 
     public boolean attack(Entity opponent) {
         Random random = new Random();
-        if (random.nextInt(100) > 30) {
+        int luck = random.nextInt(100);
+        if ( luck > 30) {
             opponent.getAttacked(attack);
             return true;
         } else {

@@ -8,7 +8,7 @@ public class SpellDab extends Spell {
 
     public SpellDab() {
         this.cost = 10;
-        this.value = 20;
+        this.value = 25;
         this.attackCry = "Dab on them haters";
         this.name = "Enrage";
     }
@@ -28,9 +28,9 @@ public class SpellDab extends Spell {
             System.out.print(attackCry);
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
-            opponent.setAttack(opponent.getAttack()+ value /4);
+            opponent.setAttack(opponent.getAttack() + value / 5);
             System.out.println(opponent.getName() + " attack has been increased!");
-            opponent.getAttacked(value *3/4);
+            opponent.getAttacked(value * 4 / 5);
             user.setMp(user.getMp() - cost);
             return true;
         }

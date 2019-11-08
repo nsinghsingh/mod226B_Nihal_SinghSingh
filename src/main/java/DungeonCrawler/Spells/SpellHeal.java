@@ -8,7 +8,7 @@ public class SpellHeal extends Spell {
 
     public SpellHeal() {
         this.cost = 10;
-        this.value = 14;
+        this.value = 18;
         this.attackCry = "HEAAAAAAAAAAAAAAAAAL!";
         this.name = "Healing Scream";
     }

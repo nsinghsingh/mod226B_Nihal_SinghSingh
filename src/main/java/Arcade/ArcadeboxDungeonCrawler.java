@@ -22,13 +22,13 @@ public class ArcadeboxDungeonCrawler {
         scanner.nextLine();
         System.out.println("What is your name?");
         String name = scanner.nextLine();
+        ArrayList<Item> items = new ArrayList<>();
+        ArrayList<Spell> spells = new ArrayList<>();
         switch (level) {
             case 1:
                 DungeonTutorial level = new DungeonTutorial();
-                ArrayList<Item> items = new ArrayList<>();
                 items.add(level.registerItems().get("hp"));
                 items.add(level.registerItems().get("mp"));
-                ArrayList<Spell> spells = new ArrayList<>();
                 spells.add(level.registerSpells().get("heal"));
                 spells.add(level.registerSpells().get("dab"));
                 spells.add(level.registerSpells().get("rest"));

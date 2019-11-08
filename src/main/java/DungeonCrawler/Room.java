@@ -13,9 +13,15 @@ public class Room {
     private ArrayList<Entity> enemies;
     private ArrayList<Item> loot;
 
-    public Room(int id) {
+    public Room(ArrayList<Entity> enemies, ArrayList<Item> loot) {
+        this.id = 0;
+        this.enemies = enemies;
+        this.loot = loot;
+    }
+
+    public Room(int id, ArrayList<Entity> enemies, ArrayList<Item> loot) {
         this.id = id;
-        this.enemies = new ArrayList<>();
-        this.loot = new ArrayList<>();
+        this.enemies = enemies;
+        this.loot = loot;
     }
 }

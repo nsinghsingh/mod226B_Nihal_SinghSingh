@@ -32,7 +32,8 @@ public class SpellInfluencer extends Spell{
         } else {
             System.out.print(attackCry);
             Random random = new Random();
-            for (int i = 0; i < random.nextInt(hits); i++) {
+            int luck = random.nextInt(hits + 1);
+            for (int i = 0; i < luck; i++) {
                 System.out.print((i+1) + " hit(s)");
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();

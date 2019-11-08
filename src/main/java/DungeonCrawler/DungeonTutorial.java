@@ -11,38 +11,29 @@ import java.util.Random;
 
 public class DungeonTutorial {
 
-    protected Room[][] dungeon = new Room[5][5];
+    private Room[][] dungeon = new Room[5][5];
     private Map<String, Entity> enemies = new HashMap<>();
     private Map<String, Item> items = new HashMap<>();
     private Map<String, Spell> spells = new HashMap<>();
-    private int itemsPerRoom = 2;
-    private int enemiesPerRoom = 2;
+    private Map<String, Room> rooms = new HashMap<>();
+    private String[] difficulties = new String[]{"easy", "midEasy", "medium", "midMedium", "hard", "final"};
 
-    public Room[][] generateDungeon() {
-        registerEnemies();
-        registerItems();
+    public Room[][] generateDungeon() { // Add rooms instead of enemies and items
+        registerRooms();
         Random random = new Random();
         for (int i = 0; i < 24; i++) {
-            dungeon[i / 5][i % 5] = new Room(i);
-            for (int j = 0; j <= random.nextInt(itemsPerRoom ); j++) {
-                int index = random.nextInt(items.size());
-                Object[] allItems = items.values().toArray();
-                dungeon[i / 5][i % 5].getLoot().add((Item) allItems[index]);
+            int index;
+            if (i / 5 > i % 5) {
+                index = random.nextInt(2) + i / 5;
             }
-            for (int j = 0; j <= random.nextInt(enemiesPerRoom); j++) {
-                int index = random.nextInt(enemies.size());
-                Object[] allEnemies = enemies.values().toArray();
-                dungeon[i / 5][i % 5].getEnemies().add((Entity) allEnemies[index]);
+            else{
+                index = random.nextInt(2) + i % 5;
             }
+            Room newRoom = rooms.get(difficulties[index]);
+            dungeon[i / 5][i % 5] = new Room(i, newRoom.getEnemies(), newRoom.getLoot());
         }
-        Room bossRoom = new Room(25);
-        bossRoom.getLoot().add(items.get("hp"));
-        bossRoom.getLoot().add(items.get("hp"));
-        bossRoom.getLoot().add(items.get("mp"));
-        bossRoom.getLoot().add(items.get("mp"));
-        bossRoom.getLoot().add(items.get("def"));
-        bossRoom.getEnemies().add(enemies.get("tutorialGod"));
-        dungeon[4][4] = bossRoom;
+        Room bossRoom = rooms.get("final");
+        dungeon[4][4] = new Room(25, bossRoom.getEnemies(), bossRoom.getLoot());
         return dungeon;
     }
 
@@ -55,13 +46,13 @@ public class DungeonTutorial {
         items.put("steelChestplate", new Armour("Steel chestplate", 10, "Adds 10 defense", 1));
         items.put("steelPants", new Armour("Steel pants", 9, "Adds 9 defense", 2));
         items.put("steelShield", new Armour("Steel shield", 6, "Adds 6 defense", 3));
-        return  items;
+        return items;
     }
 
     public Map<String, Spell> registerSpells() {
         spells.put("heal", new SpellHeal());
         spells.put("rest", new SpellRest());
-        spells.put("bigHeal", new SpellHeal(16, 40, "You thought you could beat me?", "Big heal"));
+        spells.put("bigHeal", new SpellHeal(16, 45, "You thought you could beat me?", "Big heal"));
         spells.put("godlyInfluencer", new SpellInfluencer(24, 100, 10, "Do you even know who I am?", "Godly influencer"));
         spells.put("dab", new SpellDab());
         spells.put("banana", new SpellBanana());
@@ -77,7 +68,6 @@ public class DungeonTutorial {
         newSpell.add(spells.get("heal"));
         enemies.put("tutorial", new EnemyBasic(20, 10, 10, "tutorial", newSpell));
         newSpell.clear();
-        /*
         newSpell.add(spells.get("dab"));
         enemies.put("tutorialSenior", new EnemyBasic(40, 20, 15, "tutorial senior", newSpell));
         newSpell.clear();
@@ -95,7 +85,41 @@ public class DungeonTutorial {
         newSpell.add(spells.get("bigHeal"));
         newSpell.add(spells.get("rest"));
         enemies.put("tutorialGod", new EnemyBasic(120, 60, 60, "tutorial god", newSpell));
-        */
         return enemies;
+    }
+
+    public void makeEnemy(String[] spells, String keyName, String gameName, int[] hpMpAttack) {}
+
+    public Map<String, Room> registerRooms() {
+        registerEnemies();
+        registerItems();
+        makeRoom(new String[]{"hp"}, new String[]{"tutorial", "tutorial"}, "easy");
+        makeRoom(new String[]{"mp"}, new String[]{"tutorial", "tutorialSenior"}, "midEasy");
+        makeRoom(new String[]{"steelHelmet", "hp"}, new String[]{"tutorialBoss"}, "medium");
+        makeRoom(new String[]{"hp", "hp", "blind"}, new String[]{"tutorialChief", "tutorialChief"}, "midMedium");
+        makeRoom(new String[]{"mp", "mp", "steelChestplate"}, new String[]{"tutorialPresident", "tutorialBoss"}, "midMedium");
+        makeRoom(new String[]{"blind", "def", "hp", "def"}, new String[]{"tutorialPresident", "tutorialChief"}, "hard");
+        makeRoom(new String[]{"mp", "steelShield", "mp", "def"}, new String[]{"tutorialPresident", "tutorialChief", "tutorialBoss"}, "midHard");
+        makeRoom(new String[]{"mp", "mp", "hp", "hp", "blind", "steelPants"}, new String[]{"tutorialGod"}, "final");
+        return rooms;
+    }
+
+    public void makeRoom(String[] items, String[] enemies, String name) {
+        ArrayList<Entity> newEnemies = new ArrayList<>();
+        ArrayList<Item> newItems = new ArrayList<>();
+        for (int i = 0; i < enemies.length; i++) {
+            newEnemies.add(this.enemies.get(enemies[i]));
+        }
+        for (int i = 0; i < items.length; i++) {
+            newItems.add(this.items.get(items[i]));
+        }
+        Random random = new Random();
+        int luck = random.nextInt(2);
+        for (int i = 0; i < luck; i++) {
+            int index = random.nextInt(this.items.size());
+            Object[] allItems = this.items.values().toArray();
+            newItems.add((Item) allItems[index]);
+        }
+        rooms.put(name, new Room(newEnemies, newItems));
     }
 }

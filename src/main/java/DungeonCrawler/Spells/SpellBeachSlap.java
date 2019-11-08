@@ -8,7 +8,7 @@ public class SpellBeachSlap extends Spell{
 
     public SpellBeachSlap() {
         this.cost = 13;
-        this.value = 20;
+        this.value = 30;
         this.attackCry = "Get outta here";
         this.name = "Beach slap";
     }
