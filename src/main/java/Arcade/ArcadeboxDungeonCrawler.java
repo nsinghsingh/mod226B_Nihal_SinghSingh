@@ -1,6 +1,6 @@
 package Arcade;
 
-import DungeonCrawler.DungeonTutorial;
+import DungeonCrawler.Dungeons.DungeonTutorial;
 import DungeonCrawler.Item;
 import DungeonCrawler.Normal;
 import DungeonCrawler.Player;
