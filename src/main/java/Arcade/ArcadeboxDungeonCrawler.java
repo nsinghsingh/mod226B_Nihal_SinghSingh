@@ -4,7 +4,7 @@ import DungeonCrawler.Dungeons.DungeonTutorial;
 import DungeonCrawler.Item;
 import DungeonCrawler.Normal;
 import DungeonCrawler.Player;
-import DungeonCrawler.Spells.Spell;
+import DungeonCrawler.Spells.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,14 +33,14 @@ public class ArcadeboxDungeonCrawler {
                 spells.add(level.registerSpells().get("dab"));
                 spells.add(level.registerSpells().get("rest"));
                 player = new Player(100, 100, 10, name, spells, items, level.generateDungeon());
-                player.setCurrentroom(player.getDungeon()[0][0]);
+                player.setCurrentRoom(player.getDungeon()[0][0]);
         }
 
     }
 
     public void run() {
         while (true) {
-            beginning.setCurrentRoom(player.getCurrentroom());
+            beginning.setCurrentRoom(player.getCurrentRoom());
             beginning.isFighting();
             if (player.getHp() <= 0){
                 beginning.isFighting();
@@ -52,7 +52,7 @@ public class ArcadeboxDungeonCrawler {
     public static void main(String[] args) {
         ArcadeboxDungeonCrawler dungeon = new ArcadeboxDungeonCrawler();
         dungeon.start();
-        dungeon.beginning = new Normal(dungeon.player, dungeon.player.getCurrentroom());
+        dungeon.beginning = new Normal(dungeon.player, dungeon.player.getCurrentRoom());
         dungeon.run();
     }
 

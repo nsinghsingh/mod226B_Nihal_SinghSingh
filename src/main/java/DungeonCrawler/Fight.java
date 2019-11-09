@@ -27,6 +27,10 @@ public class Fight extends DungeonCrawlerController {
             Spell currentSpell = player.chooseSpell(player.spells);
             currentSpell.setUser(player);
             hasActed = currentSpell.fire(opponent);
+            if (opponent.getHp() <= 0) {
+                System.out.println("You defeated " + opponent.getName());
+                currentRoom.getEnemies().remove(opponent);
+            }
         } else if ("3".equals(input)) {
             Entity opponent = player.targetEnemy(enemies);
             hasActed = player.attack(opponent);

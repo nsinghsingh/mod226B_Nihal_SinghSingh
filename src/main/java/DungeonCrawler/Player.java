@@ -1,6 +1,8 @@
 package DungeonCrawler;
 
+import DungeonCrawler.Potions.PotionHP;
 import DungeonCrawler.Spells.Spell;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +18,7 @@ public class Player extends Entity {
     private ArrayList<Item> items;
     private Armour[] equipment = new Armour[4];
     private Room[][] dungeon;
-    private Room currentroom;
+    private Room currentRoom;
 
     public Player(int hp, int mp, int attack, String name, ArrayList<Spell> spells, ArrayList<Item> items, Room[][] dungeon) {
         this.hp = hp;
@@ -44,7 +46,7 @@ public class Player extends Entity {
         opponent.getAttacked(attack);
         if (opponent.getHp() <= 0) {
             System.out.println("You defeated " + opponent.getName());
-            currentroom.getEnemies().remove(opponent);
+            currentRoom.getEnemies().remove(opponent);
         }
         return true;
     }
@@ -87,7 +89,7 @@ public class Player extends Entity {
     public Item chooseItem() {
         System.out.println("Which item will you use?");
         for (int i = 0; i < items.size(); i++) {
-            System.out.print((i + 1) + ". " + items.get(i).getName() + " (" + items.get(i).getEffect() + " )  ");
+            System.out.print((i + 1) + ". " + items.get(i).getName() + " (" + items.get(i).getEffect() + ")  ");
         }
         System.out.println("");
         Item currentItem;
@@ -96,7 +98,7 @@ public class Player extends Entity {
         try {
             currentItem = items.get(choice - 1);
         } catch (Exception e) {
-            currentItem = items.get(0);
+            currentItem = new PotionHP("",0,null,"");
         }
         return currentItem;
     }
@@ -122,25 +124,25 @@ public class Player extends Entity {
         dungeon[id / 5][id % 5] = room;
         if ("up".equals(direction)) {
             try {
-                currentroom = dungeon[(id / 5) - 1][id % 5];
+                currentRoom = dungeon[(id / 5) - 1][id % 5];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
         } else if ("down".equals(direction)) {
             try {
-                currentroom = dungeon[(id / 5) + 1][id % 5];
+                currentRoom = dungeon[(id / 5) + 1][id % 5];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
         } else if ("left".equals(direction)) {
             try {
-                currentroom = dungeon[id / 5][(id % 5) - 1];
+                currentRoom = dungeon[id / 5][(id % 5) - 1];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
         } else if ("right".equals(direction)) {
             try {
-                currentroom = dungeon[id / 5][(id % 5) + 1];
+                currentRoom = dungeon[id / 5][(id % 5) + 1];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
@@ -149,13 +151,13 @@ public class Player extends Entity {
 
     public void loot() {
         Scanner scanner = new Scanner(System.in);
-        if (currentroom.getLoot().size() > 0) {
-            for (Item item : currentroom.getLoot()) {
-                System.out.println("You found a " + item.getName());
+        if (currentRoom.getLoot().size() > 0) {
+            for (Item item : currentRoom.getLoot()) {
+                System.out.print("You found a " + item.getName());
                 scanner.nextLine();
                 items.add(item);
-                currentroom.getLoot().remove(item);
             }
+            currentRoom.getLoot().clear();
         }
         else{
             System.out.println("You found nothing :(");
