@@ -31,12 +31,13 @@ public class SpellInfluencer extends Spell{
             return false;
         } else {
             System.out.print(attackCry);
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
             Random random = new Random();
             int luck = random.nextInt(hits + 1);
             for (int i = 0; i < luck; i++) {
                 System.out.print((i+1) + " hit(s)");
-                Scanner scanner = new Scanner(System.in);
-                String input = scanner.nextLine();
+                input = scanner.nextLine();
                 opponent.getAttacked(value/hits);
             }
             user.setMp(user.getMp() - cost);

@@ -21,20 +21,19 @@ public abstract class Dungeon {
     protected int size;
 
     public Room[][] generateDungeon() {
-        registerRooms();
         Random random = new Random();
         for (int i = 0; i < size*size-1; i++) {
+            registerRooms();
             int index;
             if (i / 5 > i % 5) {
                 index = random.nextInt(2) + i / size;
             } else {
                 index = random.nextInt(2) + i % size;
             }
-            Room newRoom = rooms.get(difficulties[index]);
-            dungeon[i / size][i % size] = new Room(i, newRoom.getEnemies(), newRoom.getLoot());
+            dungeon[i / size][i % size] = rooms.get(difficulties[index]);
+            rooms.clear();
         }
-        Room bossRoom = rooms.get("final");
-        dungeon[size-1][size-1] = new Room(size*size, bossRoom.getEnemies(), bossRoom.getLoot());
+        dungeon[size-1][size-1] = rooms.get("final");
         return dungeon;
     }
 
