@@ -13,7 +13,7 @@ import java.util.Scanner;
 @Setter
 @Getter
 
-public class Player extends Entity {
+public class Player extends Entity { //TO DO Allow debuffs and obtaining new spells
 
     private ArrayList<Item> items;
     private Armour[] equipment = new Armour[4];
@@ -45,8 +45,7 @@ public class Player extends Entity {
     public boolean attack(Entity opponent) {
         opponent.getAttacked(attack);
         if (opponent.getHp() <= 0) {
-            System.out.println("You defeated " + opponent.getName());
-            currentRoom.getEnemies().remove(opponent);
+            enemyDefeated(opponent);
         }
         return true;
     }
@@ -98,7 +97,7 @@ public class Player extends Entity {
         try {
             currentItem = items.get(choice - 1);
         } catch (Exception e) {
-            currentItem = new PotionHP("",0,null,"");
+            currentItem = new PotionHP("", 0, null, "");
         }
         return currentItem;
     }
@@ -158,11 +157,35 @@ public class Player extends Entity {
                 items.add(item);
             }
             currentRoom.getLoot().clear();
-        }
-        else{
+        } else {
             System.out.println("You found nothing :(");
             scanner.nextLine();
         }
+    }
+
+    public void enemyDefeated(Entity opponent) {
+        Random random = new Random();
+        int luck = random.nextInt(100);
+        System.out.println("You defeated " + opponent.getName());
+        if (40 >= luck) {
+            int index = random.nextInt(opponent.getSpells().size());
+            Spell newSpell = opponent.getSpells().get(index);
+            boolean hasSpell = false;
+            for (Spell spell : spells) {
+                if (spell.getName().equals(newSpell.getName())) {
+                    hasSpell = true;
+                    spell.setValue((int) (spell.getValue() * 1.2));
+                    spell.setCost((int) (spell.getCost() * 1.1));
+                    System.out.println("After defeating " + opponent.getName() + " " + spell.getName() + " became stronger!");
+                    break;
+                }
+            }
+            if (!hasSpell) {
+                System.out.println("After defeating " + opponent.getName() + " you obtained "  + newSpell.getName());
+                spells.add(newSpell);
+            }
+        }
+        currentRoom.getEnemies().remove(opponent);
     }
 }
 

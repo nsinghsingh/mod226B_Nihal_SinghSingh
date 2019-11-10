@@ -8,7 +8,7 @@ public class SpellHeal extends Spell {
 
     public SpellHeal() {
         this.cost = 10;
-        this.value = 18;
+        this.value = 24;
         this.attackCry = "HEAAAAAAAAAAAAAAAAAL!";
         this.name = "Healing Scream";
     }
@@ -24,6 +24,7 @@ public class SpellHeal extends Spell {
     @Override
     public boolean fire(Entity opponent) {
         if (user.getMp() < cost) {
+            System.out.println(user.getName() + " tried to fire a spell but didn't have enough mana!");
             return false;
         } else {
             System.out.print(attackCry);
