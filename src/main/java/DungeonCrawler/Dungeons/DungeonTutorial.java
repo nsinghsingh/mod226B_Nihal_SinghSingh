@@ -28,10 +28,10 @@ public class DungeonTutorial extends Dungeon{
         items.put("mp", new PotionMP());
         items.put("def", new PotionDef());
         items.put("blind", new PotionBlind());
-        items.put("steelHelmet", new Armour("Steel helmet", 6, "Adds 6 defense", 0));
-        items.put("steelChestplate", new Armour("Steel chestplate", 10, "Adds 10 defense", 1));
-        items.put("steelPants", new Armour("Steel pants", 9, "Adds 9 defense", 2));
-        items.put("steelShield", new Armour("Steel shield", 6, "Adds 6 defense", 3));
+        items.put("steelHelmet", new Armour("Steel helmet", 9, "Adds 6 defense", 0));
+        items.put("steelChestplate", new Armour("Steel chestplate", 12, "Adds 10 defense", 1));
+        items.put("steelPants", new Armour("Steel pants", 11, "Adds 9 defense", 2));
+        items.put("steelShield", new Armour("Steel shield", 9, "Adds 6 defense", 3));
         return items;
     }
 

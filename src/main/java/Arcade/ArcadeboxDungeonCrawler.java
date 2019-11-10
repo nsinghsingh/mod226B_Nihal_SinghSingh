@@ -9,14 +9,17 @@ import DungeonCrawler.Spells.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ArcadeboxDungeonCrawler {
+public class ArcadeboxDungeonCrawler extends Arcadebox{
 
-    protected String intro = "Welcome to the dungeon. This is a text based game in which you'll go through a square dungeon with 25 rooms.\n" +
-            "The further you go, the more difficult the enemies will be. You'll be capable of collecting items, armour and using spells to defeat your enemies.\n" +
-            "TIP: To choose an option use numbers except when moving.";
     private Normal beginning;
     private int level = 1;
     private Player player;
+
+    public ArcadeboxDungeonCrawler(){
+        intro = "Welcome to the dungeon. This is a text based game in which you'll go through a square dungeon with 25 rooms.\n" +
+                "The further you go, the more difficult the enemies will be. You'll be capable of collecting items, armour and using spells to defeat your enemies.\n" +
+                "TIP: To choose an option use numbers except when moving.";
+    }
 
     public void start() {
         System.out.print(intro);
@@ -63,7 +66,7 @@ public class ArcadeboxDungeonCrawler {
     }
 
     public static void main(String[] args) {
-        ArcadeboxDungeonCrawler dungeon = new ArcadeboxDungeonCrawler();
+        Arcadebox dungeon = new ArcadeboxDungeonCrawler();
         dungeon.start();
         dungeon.run();
     }
