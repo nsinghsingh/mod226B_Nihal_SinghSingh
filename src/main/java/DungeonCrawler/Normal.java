@@ -10,17 +10,18 @@ public class Normal extends DungeonCrawlerController {
     public void displayOptions() {
         System.out.print("1.Health = " + player.getHp() + " ");
         System.out.print("2.Magic = " + player.getMp() + " ");
-        System.out.print("3.Move ");
-        System.out.print("4.Loot ");
-        System.out.println("5.Items");
+        System.out.print("3.Defense = " + player.getDefense() + " ");
+        System.out.print("4.Move ");
+        System.out.print("5.Loot ");
+        System.out.println("6.Items");
         String input = scanner.nextLine();
-        if (input.equals("3")) {
+        if (input.equals("4")) {
             System.out.println("Which way do you want to go? Up, down, left or right?");
             input = scanner.nextLine();
             player.move(input, currentRoom);
-        } else if (input.equals("4")) {
-            player.loot();
         } else if (input.equals("5")) {
+            player.loot();
+        } else if (input.equals("6")) {
             Item item = player.chooseItem();
             boolean hasActed = item.use(player, null);
             if (hasActed) {

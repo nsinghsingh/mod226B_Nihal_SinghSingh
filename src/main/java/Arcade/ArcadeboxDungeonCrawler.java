@@ -11,7 +11,9 @@ import java.util.Scanner;
 
 public class ArcadeboxDungeonCrawler {
 
-    protected String intro = "Welcome to the dungeon. We hope you don't die too early.";
+    protected String intro = "Welcome to the dungeon. This is a text based game in which you'll go through a square dungeon with 25 rooms.\n" +
+            "The further you go, the more difficult the enemies will be. You'll be capable of collecting items, armour and using spells to defeat your enemies.\n" +
+            "TIP: To choose an option use numbers except when moving.";
     private Normal beginning;
     private int level = 1;
     private Player player;
@@ -22,6 +24,10 @@ public class ArcadeboxDungeonCrawler {
         scanner.nextLine();
         System.out.println("What is your name?");
         String name = scanner.nextLine();
+        System.out.println("Which level do you want to play?");
+        scanner.nextLine();
+        System.out.print("Cool. We'll ignore your choice and load the first dungeon because it's the only one available");
+        scanner.nextLine();
         ArrayList<Item> items = new ArrayList<>();
         ArrayList<Spell> spells = new ArrayList<>();
         switch (level) {
@@ -42,11 +48,16 @@ public class ArcadeboxDungeonCrawler {
         while (true) {
             beginning.setCurrentRoom(player.getCurrentRoom());
             beginning.isFighting();
-            if (player.getHp() <= 0){
+            if (player.getHp() <= 0) {
                 beginning.isFighting();
-                break;
+                stop();
             }
         }
+    }
+
+    public void stop() {
+        beginning = null;
+        player = null;
     }
 
     public static void main(String[] args) {

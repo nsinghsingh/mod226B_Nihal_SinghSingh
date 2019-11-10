@@ -71,7 +71,7 @@ public class Player extends Entity { //TO DO Allow debuffs and obtaining new spe
     public Spell chooseSpell(ArrayList<Spell> spells) {
         System.out.println("Which spell will you use?");
         for (int i = 0; i < spells.size(); i++) {
-            System.out.print((i + 1) + ". " + spells.get(i).getName() + " (" + spells.get(i).getValue() + " damage, " + spells.get(i).getCost() + " magic)  ");
+            System.out.print((i + 1) + ". " + spells.get(i).getName() + " (" + spells.get(i).getValue() + " value, " + spells.get(i).getCost() + " magic)  ");
         }
         System.out.println("");
         Spell currentSpell;

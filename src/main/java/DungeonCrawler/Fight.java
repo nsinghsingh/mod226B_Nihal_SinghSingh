@@ -18,9 +18,10 @@ public class Fight extends DungeonCrawlerController {
         boolean hasActed;
         System.out.print("1.Health = " + player.getHp() + " ");
         System.out.print("2.Magic = " + player.getMp() + " ");
-        System.out.print("3.Attack ");
-        System.out.print("4.Run ");
-        System.out.println("5.Items");
+        System.out.print("3.Defense = " + player.getDefense() + " ");
+        System.out.print("4.Attack ");
+        System.out.print("5.Run ");
+        System.out.println("6.Items");
         String input = scanner.nextLine();
         if ("2".equals(input)) {
             Entity opponent = player.targetEnemy(enemies);
@@ -30,12 +31,12 @@ public class Fight extends DungeonCrawlerController {
             if (opponent.getHp() <= 0) {
                 player.enemyDefeated(opponent);
             }
-        } else if ("3".equals(input)) {
+        } else if ("4".equals(input)) {
             Entity opponent = player.targetEnemy(enemies);
             hasActed = player.attack(opponent);
-        } else if ("4".equals(input)) {
-            hasActed = player.run(currentRoom);
         } else if ("5".equals(input)) {
+            hasActed = player.run(currentRoom);
+        } else if ("6".equals(input)) {
             Entity opponent = player.targetEnemy(enemies);
             Item item = player.chooseItem();
             hasActed = item.use(player, opponent);
