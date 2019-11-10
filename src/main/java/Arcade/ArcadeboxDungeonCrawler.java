@@ -41,6 +41,7 @@ public class ArcadeboxDungeonCrawler {
                 player = new Player(100, 100, 10, name, spells, items, level.generateDungeon());
                 player.setCurrentRoom(player.getDungeon()[0][0]);
         }
+        beginning = new Normal(player, player.getCurrentRoom());
 
     }
 
@@ -51,6 +52,7 @@ public class ArcadeboxDungeonCrawler {
             if (player.getHp() <= 0) {
                 beginning.isFighting();
                 stop();
+                break;
             }
         }
     }
@@ -63,7 +65,6 @@ public class ArcadeboxDungeonCrawler {
     public static void main(String[] args) {
         ArcadeboxDungeonCrawler dungeon = new ArcadeboxDungeonCrawler();
         dungeon.start();
-        dungeon.beginning = new Normal(dungeon.player, dungeon.player.getCurrentRoom());
         dungeon.run();
     }
 

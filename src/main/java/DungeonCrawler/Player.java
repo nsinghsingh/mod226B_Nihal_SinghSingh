@@ -113,7 +113,7 @@ public class Player extends Entity { //TO DO Allow debuffs and obtaining new spe
             move(input, room);
         } else {
             System.out.println("You can't see a way out!");
-            return false;
+            return true;
         }
         return true;
     }

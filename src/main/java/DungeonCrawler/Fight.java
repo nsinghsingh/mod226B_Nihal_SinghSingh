@@ -68,6 +68,5 @@ public class Fight extends DungeonCrawlerController {
 
     public void gameOver() {
         System.out.println("You died :(");
-        player = null;
     }
 }
