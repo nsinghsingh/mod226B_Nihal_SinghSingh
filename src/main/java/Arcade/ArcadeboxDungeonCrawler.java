@@ -21,7 +21,7 @@ public class ArcadeboxDungeonCrawler extends Arcadebox{
                 "TIP: To choose an option use numbers except when moving.";
     }
 
-    public void start() {
+    public void start(String[] args) {
         System.out.print(intro);
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
@@ -45,7 +45,7 @@ public class ArcadeboxDungeonCrawler extends Arcadebox{
                 player.setCurrentRoom(player.getDungeon()[0][0]);
         }
         beginning = new Normal(player, player.getCurrentRoom());
-
+        run();
     }
 
     public void run() {
@@ -64,11 +64,4 @@ public class ArcadeboxDungeonCrawler extends Arcadebox{
         beginning = null;
         player = null;
     }
-
-    public static void main(String[] args) {
-        Arcadebox dungeon = new ArcadeboxDungeonCrawler();
-        dungeon.start();
-        dungeon.run();
-    }
-
 }
