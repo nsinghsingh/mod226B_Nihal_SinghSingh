@@ -4,7 +4,7 @@ import DungeonCrawler.Entity;
 
 import java.util.Scanner;
 
-public class SpellBanana extends Spell{
+public class SpellBanana extends Spell {
 
     public SpellBanana() {
         this.cost = 11;
@@ -28,9 +28,9 @@ public class SpellBanana extends Spell{
             System.out.print(attackCry);
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
-            opponent.setDefense(opponent.getDefense()- value /2);
+            opponent.setDefense(opponent.getDefense() - value / 2);
             System.out.println(opponent.getName() + " defense has been lowered!");
-            opponent.getAttacked(value /2);
+            opponent.getAttacked(value / 2);
             user.setMp(user.getMp() - cost);
             return true;
         }

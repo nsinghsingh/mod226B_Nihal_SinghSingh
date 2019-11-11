@@ -27,6 +27,7 @@ public class Armour extends Item {
             System.out.println("You have equipped " + name);
             player.getItems().remove(this);
             player.setDefense(player.getDefense() + value);
+            player.setRealDefense(player.getDefense());
             equipment[armourPiece] = this;
             return true;
         } else {
@@ -38,6 +39,7 @@ public class Armour extends Item {
                 player.setDefense(player.getDefense() - equipment[armourPiece].value);
                 player.getItems().remove(this);
                 player.setDefense(player.getDefense() + value);
+                player.setRealDefense(player.getDefense());
                 equipment[armourPiece] = this;
                 return true;
             }

@@ -8,6 +8,8 @@ public class Normal extends DungeonCrawlerController {
     }
 
     public void displayOptions() {
+        player.setAttack(player.getRealAttack());
+        player.setDefense(player.getRealDefense());
         System.out.print("1.Health = " + player.getHp() + " ");
         System.out.print("2.Magic = " + player.getMp() + " ");
         System.out.print("3.Defense = " + player.getDefense() + " ");

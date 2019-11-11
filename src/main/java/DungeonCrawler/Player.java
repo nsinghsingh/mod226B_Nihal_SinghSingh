@@ -19,6 +19,8 @@ public class Player extends Entity { //TO DO Allow debuffs
     private Armour[] equipment = new Armour[4];
     private Room[][] dungeon;
     private Room currentRoom;
+    private int realDefense;
+    private int realAttack;
 
     public Player(int hp, int mp, int attack, String name, ArrayList<Spell> spells, ArrayList<Item> items, Room[][] dungeon) {
         this.hp = hp;
@@ -29,6 +31,8 @@ public class Player extends Entity { //TO DO Allow debuffs
         this.items = items;
         this.dungeon = dungeon;
         this.defense = 0;
+        realAttack = attack;
+        realDefense = defense;
     }
 
     public void getAttacked(int damage) {
