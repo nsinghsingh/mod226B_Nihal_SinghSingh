@@ -13,7 +13,7 @@ import java.util.Scanner;
 @Setter
 @Getter
 
-public class Player extends Entity { //TO DO Allow debuffs and obtaining new spells
+public class Player extends Entity { //TO DO Allow debuffs
 
     private ArrayList<Item> items;
     private Armour[] equipment = new Armour[4];

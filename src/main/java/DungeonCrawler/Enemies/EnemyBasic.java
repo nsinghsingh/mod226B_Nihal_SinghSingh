@@ -40,6 +40,9 @@ public class EnemyBasic extends Entity {
                 int index = random.nextInt(spells.size());
                 Spell currentSpell = spells.get(index);
                 currentSpell.setUser(this);
+                System.out.print(name + " fired a spell!");
+                Scanner scanner = new Scanner(System.in);
+                String input = scanner.nextLine();
                 return currentSpell.fire(opponent);
             }
             else{

@@ -30,10 +30,15 @@ public abstract class Dungeon {
             } else {
                 index = random.nextInt(2) + i % size;
             }
-            dungeon[i / size][i % size] = rooms.get(difficulties[index]);
+            Room newRoom = rooms.get(difficulties[index]);
+            newRoom.setId(i);
+            dungeon[i / size][i % size] = newRoom;
             rooms.clear();
         }
-        dungeon[size-1][size-1] = rooms.get("final");
+        registerRooms();
+        Room bossRoom = rooms.get("final");
+        bossRoom.setId(24);
+        dungeon[size-1][size-1] = bossRoom;
         return dungeon;
     }
 
