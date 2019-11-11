@@ -2,7 +2,7 @@ package Arcade;
 
 public class ArcadeboxAdventureZone extends Arcadebox{
     @Override
-    public void start(String[] args) {
+    public void start() {
 
     }
 

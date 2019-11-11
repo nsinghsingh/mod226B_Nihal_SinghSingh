@@ -21,7 +21,7 @@ public class ArcadeboxDungeonCrawler extends Arcadebox{
                 "TIP: To choose an option use numbers except when moving.";
     }
 
-    public void start(String[] args) {
+    public void start() {
         System.out.print(intro);
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();

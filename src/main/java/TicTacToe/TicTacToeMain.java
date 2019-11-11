@@ -13,9 +13,10 @@ public class TicTacToeMain extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/TicTacToe.fxml"));
         primaryStage.setTitle("Tic Tac Toe");
         primaryStage.setScene(new Scene(root, 600, 600));
+        primaryStage.setAlwaysOnTop(true);
         primaryStage.show();
     }
-    public void load(String[] args){
-        launch(args);
+    public void load(){
+        launch();
     }
 }

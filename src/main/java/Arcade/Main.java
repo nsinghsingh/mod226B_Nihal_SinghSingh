@@ -12,15 +12,21 @@ public class Main {
         System.out.print("Welcome to the arcade!");
         String input = scanner.nextLine();
         System.out.println("Here you can play three different games:");
-        System.out.println("Tic Tac Toe against an AI or a second player,");
-        System.out.println("a choose your own adventure game with multiple endings");
-        System.out.print("or the most advanced game of them all, the Dungeon Crawler.");
+        System.out.print("Tic Tac Toe against an AI or a second player,");
+        System.out.print(" a choose your own adventure game with multiple endings");
+        System.out.print(" or the most advanced game of them all, the Dungeon Crawler.");
         input = scanner.nextLine();
         while (true){
             System.out.println("So which game will it be? 1. Tic Tac Toe 2. Adventure Zone 3. Dungeon Crawler");
             try{
+                scanner = new Scanner(System.in);
                 int index = scanner.nextInt();
-                main.games[index].start(args);
+                System.out.println("Are you sure you want to play this game?");
+                scanner = new Scanner(System.in);
+                input = scanner.nextLine();
+                if (input.equals("yes")){
+                    main.games[index-1].start();
+                }
             }catch (Exception e){
                 System.out.println("Could you please give in a number to choose a game?");
             }

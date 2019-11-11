@@ -6,14 +6,14 @@ public class ArcadeboxTicTacToe extends Arcadebox{
 
     TicTacToeMain ticTacToe;
 
-    public void start(String[] args) {
-        TicTacToeMain ticTacToe = new TicTacToeMain();
-        ticTacToe.load(args);
-        stop();
+    public void start() {
+        ticTacToe = new TicTacToeMain();
+        run();
     }
 
     public void run() {
-
+        ticTacToe.load();
+        stop();
     }
 
     public void stop() {
