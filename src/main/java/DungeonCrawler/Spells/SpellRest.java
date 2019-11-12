@@ -7,17 +7,15 @@ import java.util.Scanner;
 public class SpellRest extends Spell {
 
     public SpellRest() {
-        this.cost = 0;
-        this.value = 21;
-        this.attackCry = "ZZZZZZZZ";
-        this.name = "Rest";
+        super(0, 21, "ZZZZZZZZ", "Rest");
     }
 
-    public SpellRest(int cost, int damage, String attackCry, String name) {
-        this.cost = cost;
-        this.value = damage;
-        this.attackCry = attackCry;
-        this.name = name;
+    public SpellRest(int cost, int value, String attackCry, String name) {
+        super(cost, value, attackCry, name);
+    }
+
+    public SpellRest(Spell spell) {
+        super(spell);
     }
 
     @Override

@@ -7,17 +7,15 @@ import java.util.Scanner;
 public class SpellBlackHole extends Spell{
 
     public SpellBlackHole() {
-        this.cost = 1;
-        this.value = 100;
-        this.attackCry = "Be reduced to atoms";
-        this.name = "Universal finisher";
+        super(1, 100, "Be reduced to atoms", "Universal finisher");
     }
 
-    public SpellBlackHole(int cost, int damage, String attackCry, String name) {
-        this.cost = cost;
-        this.value = damage;
-        this.attackCry = attackCry;
-        this.name = name;
+    public SpellBlackHole(int cost, int value, String attackCry, String name) {
+        super(cost, value, attackCry, name);
+    }
+
+    public SpellBlackHole(Spell spell) {
+        super(spell);
     }
 
     @Override

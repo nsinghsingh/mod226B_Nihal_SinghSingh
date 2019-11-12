@@ -18,6 +18,15 @@ public class EnemyBasic extends Entity {
         this.defense = 0;
     }
 
+    public EnemyBasic(EnemyBasic enemy) {
+        this.hp = enemy.getHp();
+        this.mp = enemy.getMp();
+        this.attack = enemy.getAttack();
+        this.name = enemy.getName();
+        this.spells = enemy.getSpells();
+        this.defense = enemy.getDefense();
+    }
+
     public void getAttacked(int damage) {
         damage -= defense;
         if (damage < 0) {

@@ -19,6 +19,12 @@ public class Room {
         this.loot = loot;
     }
 
+    public Room(Room room) {
+        this.id = room.getId();
+        this.enemies = room.getEnemies();
+        this.loot = room.getLoot();
+    }
+
     public Room(int id, ArrayList<Entity> enemies, ArrayList<Item> loot) {
         this.id = id;
         this.enemies = enemies;

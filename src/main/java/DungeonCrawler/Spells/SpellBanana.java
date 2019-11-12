@@ -7,17 +7,15 @@ import java.util.Scanner;
 public class SpellBanana extends Spell {
 
     public SpellBanana() {
-        this.cost = 11;
-        this.value = 14;
-        this.attackCry = "Take this banana!";
-        this.name = "Banana slip";
+        super(11, 14, "Take this banana!", "Banana slip");
     }
 
-    public SpellBanana(int cost, int damage, String attackCry, String name) {
-        this.cost = cost;
-        this.value = damage;
-        this.attackCry = attackCry;
-        this.name = name;
+    public SpellBanana(int cost, int value, String attackCry, String name) {
+        super(cost, value, attackCry, name);
+    }
+
+    public SpellBanana(Spell spell) {
+        super(spell);
     }
 
     @Override

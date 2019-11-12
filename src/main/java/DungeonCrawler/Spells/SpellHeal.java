@@ -7,19 +7,16 @@ import java.util.Scanner;
 public class SpellHeal extends Spell {
 
     public SpellHeal() {
-        this.cost = 10;
-        this.value = 24;
-        this.attackCry = "HEAAAAAAAAAAAAAAAAAL!";
-        this.name = "Healing Scream";
+        super(10, 24, "HEAAAAAAAAAAAAAAAAAL!", "Healing Scream");
     }
 
-    public SpellHeal(int cost, int damage, String attackCry, String name) {
-        this.cost = cost;
-        this.value = damage;
-        this.attackCry = attackCry;
-        this.name = name;
+    public SpellHeal(int cost, int value, String attackCry, String name) {
+        super(cost, value, attackCry, name);
     }
 
+    public SpellHeal(Spell spell) {
+        super(spell);
+    }
 
     @Override
     public boolean fire(Entity opponent) {

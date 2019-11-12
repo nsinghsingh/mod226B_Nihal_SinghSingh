@@ -7,17 +7,15 @@ import java.util.Scanner;
 public class SpellDab extends Spell {
 
     public SpellDab() {
-        this.cost = 10;
-        this.value = 25;
-        this.attackCry = "Dab on them haters";
-        this.name = "Enrage";
+        super(10, 25, "Dab on them haters", "Enrage");
     }
 
-    public SpellDab(int cost, int damage, String attackCry, String name) {
-        this.cost = cost;
-        this.value = damage;
-        this.attackCry = attackCry;
-        this.name = name;
+    public SpellDab(int cost, int value, String attackCry, String name) {
+        super(cost, value, attackCry, name);
+    }
+
+    public SpellDab(Spell spell) {
+        super(spell);
     }
 
     @Override

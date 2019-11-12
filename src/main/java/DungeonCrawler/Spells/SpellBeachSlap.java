@@ -7,17 +7,15 @@ import java.util.Scanner;
 public class SpellBeachSlap extends Spell{
 
     public SpellBeachSlap() {
-        this.cost = 13;
-        this.value = 30;
-        this.attackCry = "Get outta here";
-        this.name = "Beach slap";
+        super(13, 30, "Get outta here", "Beach slap");
     }
 
-    public SpellBeachSlap(int cost, int damage, String attackCry, String name) {
-        this.cost = cost;
-        this.value = damage;
-        this.attackCry = attackCry;
-        this.name = name;
+    public SpellBeachSlap(int cost, int value, String attackCry, String name) {
+        super(cost, value, attackCry, name);
+    }
+
+    public SpellBeachSlap(Spell spell) {
+        super(spell);
     }
 
     @Override
