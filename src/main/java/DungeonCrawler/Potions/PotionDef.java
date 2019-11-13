@@ -1,6 +1,7 @@
 package DungeonCrawler.Potions;
 
 import DungeonCrawler.Entity;
+import DungeonCrawler.Player;
 
 public class PotionDef extends Potion {
 
@@ -20,6 +21,9 @@ public class PotionDef extends Potion {
 
     public boolean use(Entity user, Entity opponent) {
         user.setDefense(user.getDefense() + value);
+        try{
+            ((Player) user).setRealDefense(user.getDefense());
+        }catch (Exception ignored){}
         return true;
     }
 }
