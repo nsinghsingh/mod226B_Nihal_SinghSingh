@@ -32,6 +32,7 @@ public class SpellInfluencer extends Spell{
     @Override
     public boolean fire(Entity opponent) {
         if (user.getMp() < cost) {
+            System.out.println(user.getName() + " tried to fire a spell but didn't have enough mana!");
             return false;
         } else {
             System.out.print(attackCry);

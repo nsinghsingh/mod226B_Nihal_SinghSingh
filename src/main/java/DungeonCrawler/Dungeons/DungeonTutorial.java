@@ -28,10 +28,10 @@ public class DungeonTutorial extends Dungeon{
         items.put("mp", new PotionMP());
         items.put("def", new PotionDef());
         items.put("blind", new PotionBlind());
-        items.put("steelHelmet", new Armour("Steel helmet", 9, "Adds 6 defense", 0));
-        items.put("steelChestplate", new Armour("Steel chestplate", 12, "Adds 10 defense", 1));
-        items.put("steelPants", new Armour("Steel pants", 11, "Adds 9 defense", 2));
-        items.put("steelShield", new Armour("Steel shield", 9, "Adds 6 defense", 3));
+        items.put("steelHelmet", new Armour("Steel helmet", 9, "Adds 9 defense", 0));
+        items.put("steelChestplate", new Armour("Steel chestplate", 12, "Adds 12 defense", 1));
+        items.put("steelPants", new Armour("Steel pants", 11, "Adds 11 defense", 2));
+        items.put("steelShield", new Armour("Steel shield", 9, "Adds 9 defense", 3));
         return items;
     }
 
@@ -39,7 +39,7 @@ public class DungeonTutorial extends Dungeon{
         spells.put("heal", new SpellHeal());
         spells.put("rest", new SpellRest());
         spells.put("bigHeal", new SpellHeal(16, 45, "You thought you could beat me?", "Big heal"));
-        spells.put("godlyInfluencer", new SpellInfluencer(24, 100, 10, "Do you even know who I am?", "Godly influencer"));
+        spells.put("godlyInfluencer", new SpellInfluencer(24, 120,  "Do you even know who I am?", "Godly influencer", 3));
         spells.put("dab", new SpellDab());
         spells.put("banana", new SpellBanana());
         spells.put("slap", new SpellBeachSlap());
@@ -49,7 +49,6 @@ public class DungeonTutorial extends Dungeon{
     }
 
     public Map<String, Entity> registerEnemies() {
-        registerSpells();
         enemies.put("tutorial", new EnemyBasic(20, 10, 10, "tutorial", makeSpellArray(new String[]{"heal"})));
         enemies.put("tutorialSenior", new EnemyBasic(40, 20, 15, "tutorial senior", makeSpellArray(new String[]{"dab"})));
         enemies.put("tutorialChief", new EnemyBasic(60, 30, 20, "tutorial chief", makeSpellArray(new String[]{"banana"})));
@@ -60,8 +59,6 @@ public class DungeonTutorial extends Dungeon{
     }
 
     public Map<String, Room> registerRooms() {
-        registerEnemies();
-        registerItems();
         makeRoom(new String[]{"hp"}, new String[]{"tutorial", "tutorial"}, "easy");
         makeRoom(new String[]{"mp"}, new String[]{"tutorial", "tutorialSenior"}, "midEasy");
         makeRoom(new String[]{"steelHelmet", "hp"}, new String[]{"tutorialBoss"}, "medium");

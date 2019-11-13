@@ -32,13 +32,13 @@ public abstract class Dungeon {
             }
             Room newRoom = rooms.get(difficulties[index]);
             newRoom.setId(i);
-            dungeon[i / size][i % size] = newRoom;
+            dungeon[i / size][i % size] = new Room(newRoom);
             rooms.clear();
         }
         registerRooms();
         Room bossRoom = rooms.get("final");
         bossRoom.setId(24);
-        dungeon[size-1][size-1] = bossRoom;
+        dungeon[size-1][size-1] = new Room(bossRoom);
         return dungeon;
     }
 
@@ -51,7 +51,10 @@ public abstract class Dungeon {
     public ArrayList<Spell> makeSpellArray(String[] spells) {
         ArrayList<Spell> newSpells = new ArrayList<>();
         for (int i = 0; i < spells.length; i++) {
-            newSpells.add(this.spells.get(spells[i]));
+            registerSpells();
+            Spell newSpell = this.spells.get(spells[i]);
+            newSpells.add(newSpell);
+            this.spells.clear();
         }
         return newSpells;
     }
@@ -62,12 +65,14 @@ public abstract class Dungeon {
         ArrayList<Entity> newEnemies = new ArrayList<>();
         ArrayList<Item> newItems = new ArrayList<>();
         for (int i = 0; i < enemies.length; i++) {
-            Entity savedEnemy = this.enemies.get(enemies[i]);
-            Entity newEnemy = new EnemyBasic(savedEnemy.getHp(), savedEnemy.getMp(), savedEnemy.getAttack(), savedEnemy.getName(), savedEnemy.getSpells());
+            registerEnemies();
+            Entity newEnemy = this.enemies.get(enemies[i]);
             newEnemies.add(newEnemy);
+            this.enemies.clear();
         }
         for (int i = 0; i < items.length; i++) {
-            newItems.add(this.items.get(items[i]));
+            Item item = this.items.get(items[i]);
+            newItems.add(item);
         }
         Random random = new Random();
         int luck = random.nextInt(2);

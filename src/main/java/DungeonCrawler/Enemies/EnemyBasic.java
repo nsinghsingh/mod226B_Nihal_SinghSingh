@@ -18,7 +18,7 @@ public class EnemyBasic extends Entity {
         this.defense = 0;
     }
 
-    public EnemyBasic(EnemyBasic enemy) {
+    public EnemyBasic(Entity enemy) {
         this.hp = enemy.getHp();
         this.mp = enemy.getMp();
         this.attack = enemy.getAttack();
@@ -49,7 +49,7 @@ public class EnemyBasic extends Entity {
                 int index = random.nextInt(spells.size());
                 Spell currentSpell = spells.get(index);
                 currentSpell.setUser(this);
-                System.out.print(name + " fired a spell!");
+                System.out.print(name + " prepares himself to fire a spell!");
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
                 return currentSpell.fire(opponent);
