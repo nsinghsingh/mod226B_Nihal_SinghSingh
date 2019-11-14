@@ -9,6 +9,7 @@ public class ArcadeboxAdventureZone extends Arcadebox{
     @Override
     public void start() {
         adventureZone = new AdventureZoneMain();
+        run();
     }
 
     @Override
