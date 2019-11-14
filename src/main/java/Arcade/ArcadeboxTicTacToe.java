@@ -4,7 +4,7 @@ import TicTacToe.TicTacToeMain;
 
 public class ArcadeboxTicTacToe extends Arcadebox{
 
-    TicTacToeMain ticTacToe;
+    private TicTacToeMain ticTacToe;
 
     public void start() {
         ticTacToe = new TicTacToeMain();

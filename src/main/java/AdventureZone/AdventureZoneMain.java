@@ -10,7 +10,7 @@ public class AdventureZoneMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/TicTacToe.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/AdventureZone.fxml"));
         primaryStage.setTitle("Adventure Zone");
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.setAlwaysOnTop(true);
