@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    Arcadebox[] games = new Arcadebox[]{new ArcadeboxTicTacToe(), new ArcadeboxAdventureZone(), new ArcadeboxDungeonCrawler()};
+    private Arcadebox[] games = new Arcadebox[]{new ArcadeboxTicTacToe(), new ArcadeboxAdventureZone(), new ArcadeboxDungeonCrawler()};
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -29,6 +29,7 @@ public class Main {
                 }
             }catch (Exception e){
                 System.out.println("Could you please give in a number to choose a game?");
+                System.out.println(e.getLocalizedMessage());
             }
             System.out.println("Would you like to keep on playing? (yes or no)");
             scanner = new Scanner(System.in);
