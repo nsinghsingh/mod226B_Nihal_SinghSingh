@@ -20,13 +20,13 @@ public class AdventureZoneController {
         load();
     }
     public void load(){
-        System.out.println(currentChoice.getText());
+        System.out.print(currentChoice.getText());
         if (currentChoice.getRightChoice() == 0){
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
         }
         else{
-            System.out.println("1. " + currentChoice.getLeftText() + " 2. " + currentChoice.getRightText());
+            System.out.println("1. " + currentChoice.getLeftText().concat(" 2. " + currentChoice.getRightText()));
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             if (input.equals("1")){
