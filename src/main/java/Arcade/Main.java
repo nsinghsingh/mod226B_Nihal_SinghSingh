@@ -21,14 +21,13 @@ public class Main {
             try{
                 scanner = new Scanner(System.in);
                 int index = scanner.nextInt();
-                System.out.println("Are you sure you want to play this game?");
+                System.out.println("Are you sure you want to play this game? (yes or no)");
                 scanner = new Scanner(System.in);
                 input = scanner.nextLine();
                 if (input.equals("yes")){
                     main.games[index-1].start();
                 }
             }catch (Exception e){
-                System.out.println("Could you please give in a number to choose a game?");
                 System.out.println(e.getLocalizedMessage());
             }
             System.out.println("Would you like to keep on playing? (yes or no)");

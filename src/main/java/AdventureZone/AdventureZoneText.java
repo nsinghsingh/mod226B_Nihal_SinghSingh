@@ -3,6 +3,7 @@ package AdventureZone;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -16,22 +17,26 @@ public class AdventureZoneText {
     @Setter @Getter
     public AdventureZoneChoice[] choices = new AdventureZoneChoice[39];
 
-    AdventureZoneText() throws IOException {
-        String[] story = getText("C:/Users/vmadmin/Desktop/","Story.txt");
-        String[] rightText = getText("","");
-        String[] leftText = getText("","");
-        int[] leftChoice = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        int[] rightChoice = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        for (int i = (choices.length - 1); i > -1; i--) {
+    AdventureZoneText(){
+        String[] story = getText("src/main/resources/","Story.txt");
+        String[] rightText = getText("src/main/resources","Story.txt");
+        String[] leftText = getText("src/main/resources","Story.txt");
+        int[] leftChoice = new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] rightChoice = new int[]{2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0; i < story.length; i++) {
             choices[i] = new AdventureZoneChoice(story[i], leftText[i], rightText[i], leftChoice[i], rightChoice[i]);
         }
     }
-    public String[] getText(String directory, String file) throws IOException {
-        Path path = Paths.get(directory, file);
-        Charset charset = StandardCharsets.UTF_8;
-        List<String> lines = Files.readAllLines(path, charset);
-        String[] text = lines.toArray(new String[lines.size()]);
-        return text;
+    public String[] getText(String directory, String file){
+        try {
+            Path path = Paths.get(directory, file);
+            Charset charset = StandardCharsets.UTF_8;
+            List<String> lines = Files.readAllLines(path, charset);
+            String[] text = lines.toArray(new String[lines.size()]);
+            return text;
+        } catch (IOException ignored){
+            return null;
+        }
     }
 }
 
