@@ -9,11 +9,12 @@ import DungeonCrawler.Spells.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ArcadeboxDungeonCrawler extends Arcadebox{
+public class ArcadeboxDungeonCrawler implements Arcadebox{
 
     private Normal beginning;
-    private int level = 1;
+    private static int level = 1;
     private Player player;
+    private String intro;
 
     public ArcadeboxDungeonCrawler(){
         intro = "Welcome to the dungeon. This is a text based game in which you'll go through a square dungeon with 25 rooms.\n" +

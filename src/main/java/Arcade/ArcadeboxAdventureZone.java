@@ -2,9 +2,9 @@ package Arcade;
 
 import AdventureZone.AdventureZoneController;
 
-public class ArcadeboxAdventureZone extends Arcadebox{
+public class ArcadeboxAdventureZone implements Arcadebox{
 
-    AdventureZoneController adventureZone;
+    private AdventureZoneController adventureZone;
 
     @Override
     public void start(){
@@ -14,7 +14,7 @@ public class ArcadeboxAdventureZone extends Arcadebox{
 
     @Override
     public void run() {
-        adventureZone.loadChoice();
+        adventureZone.load();
         stop();
     }
 

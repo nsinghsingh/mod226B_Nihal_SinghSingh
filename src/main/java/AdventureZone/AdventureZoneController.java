@@ -11,15 +11,15 @@ public class AdventureZoneController {
     public void chooseLeft(){
         int index = currentChoice.getLeftChoice();
         currentChoice = story.getChoices()[index];
-        loadChoice();
+        load();
 
     }
     public void chooseRight(){
         int index = currentChoice.getRightChoice();
         currentChoice = story.getChoices()[index];
-        loadChoice();
+        load();
     }
-    public void loadChoice(){
+    public void load(){
         System.out.println(currentChoice.getText());
         if (currentChoice.getRightChoice() == 0){
             Scanner scanner = new Scanner(System.in);

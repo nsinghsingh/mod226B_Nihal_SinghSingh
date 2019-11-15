@@ -2,7 +2,7 @@ package Arcade;
 
 import TicTacToe.TicTacToeMain;
 
-public class ArcadeboxTicTacToe extends Arcadebox{
+public class ArcadeboxTicTacToe implements Arcadebox{
 
     private TicTacToeMain ticTacToe;
 

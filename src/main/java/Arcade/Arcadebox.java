@@ -1,12 +1,10 @@
 package Arcade;
 
-public abstract class Arcadebox {
+public interface Arcadebox {
 
-    protected String intro;
+    void start();
 
-    public abstract void start();
+    void run();
 
-    public abstract void run();
-
-    public abstract void stop();
+    void stop();
 }
