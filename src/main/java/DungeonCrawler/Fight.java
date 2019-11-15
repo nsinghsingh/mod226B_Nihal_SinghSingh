@@ -1,10 +1,12 @@
 package DungeonCrawler;
 
+import DungeonCrawler.Spells.Spell;
+
 import java.util.ArrayList;
 
 public class Fight extends DungeonCrawlerController {
 
-    private ArrayList<EnemyBasic> enemies;
+    private ArrayList<Entity> enemies;
 
     public Fight(Player player, Room currentRoom) {
         setPlayer(player);
@@ -14,25 +16,32 @@ public class Fight extends DungeonCrawlerController {
 
     public void displayOptions() {
         boolean hasActed;
-        System.out.println("1.Health = " + player.getHp() + " ");
+        System.out.print("1.Health = " + player.getHp() + " ");
         System.out.print("2.Magic = " + player.getMp() + " ");
-        System.out.print("3.Attack ");
-        System.out.print("4.Run ");
-        System.out.println("5.Items");
+        System.out.print("3.Defense = " + player.getDefense() + " ");
+        System.out.print("4.Attack ");
+        System.out.print("5.Run ");
+        System.out.println("6.Items");
         String input = scanner.nextLine();
         if ("2".equals(input)) {
             Entity opponent = player.targetEnemy(enemies);
             Spell currentSpell = player.chooseSpell(player.spells);
+            currentSpell.setUser(player);
+            System.out.print("You fired a spell!");
+            input = scanner.nextLine();
             hasActed = currentSpell.fire(opponent);
-        } else if ("3".equals(input)) {
-            EnemyBasic opponent;
-            opponent = player.targetEnemy(enemies);
-            hasActed = player.attack(opponent);
+            if (opponent.getHp() <= 0) {
+                player.enemyDefeated(opponent);
+            }
         } else if ("4".equals(input)) {
-            hasActed = player.run(currentRoom);
+            Entity opponent = player.targetEnemy(enemies);
+            hasActed = player.attack(opponent);
         } else if ("5".equals(input)) {
+            hasActed = player.run(currentRoom);
+        } else if ("6".equals(input)) {
+            Entity opponent = player.targetEnemy(enemies);
             Item item = player.chooseItem();
-            hasActed = item.use(player);
+            hasActed = item.use(player, opponent);
             if (hasActed) {
                 player.getItems().remove(item);
             }
@@ -50,22 +59,16 @@ public class Fight extends DungeonCrawlerController {
     }
 
     public void isFighting() {
-        if (enemies.size() <= 0) {
-            Normal normal = new Normal(player, currentRoom);
-            normal.displayOptions();
+        if (player.getHp() <= 0) {
+            gameOver();
         } else {
-            if (player.getHp() <= 0){
-                gameOver();
-            }
-            else {
-                System.out.println("You are fighting some monsters. What would you like to do?");
-                displayOptions();
-            }
+            System.out.println("You are fighting some monsters. What would you like to do?");
+            displayOptions();
         }
     }
 
-    public void gameOver(){
+
+    public void gameOver() {
         System.out.println("You died :(");
-        player = null;
     }
 }

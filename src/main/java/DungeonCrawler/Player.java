@@ -1,5 +1,8 @@
 package DungeonCrawler;
 
+import DungeonCrawler.Potions.PotionHP;
+import DungeonCrawler.Spells.Spell;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +13,14 @@ import java.util.Scanner;
 @Setter
 @Getter
 
-public class Player extends Entity {
+public class Player extends Entity { //TO DO Allow debuffs
 
     private ArrayList<Item> items;
     private Armour[] equipment = new Armour[4];
     private Room[][] dungeon;
-    private Room currentroom;
+    private Room currentRoom;
+    private int realDefense;
+    private int realAttack;
 
     public Player(int hp, int mp, int attack, String name, ArrayList<Spell> spells, ArrayList<Item> items, Room[][] dungeon) {
         this.hp = hp;
@@ -26,54 +31,59 @@ public class Player extends Entity {
         this.items = items;
         this.dungeon = dungeon;
         this.defense = 0;
+        realAttack = attack;
+        realDefense = defense;
     }
 
     public void getAttacked(int damage) {
         damage -= defense;
-        if (damage < 0){
+        if (damage < 0) {
             damage = 0;
         }
-        System.out.println("You took " + damage + " damage!");
+        System.out.print("You took " + damage + " damage!");
+        hp -= damage;
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
     }
 
     public boolean attack(Entity opponent) {
         opponent.getAttacked(attack);
         if (opponent.getHp() <= 0) {
-            System.out.println("You defeated " + opponent.getName());
-            currentroom.getEnemies().remove(opponent);
+            enemyDefeated(opponent);
         }
         return true;
     }
 
-    public EnemyBasic targetEnemy(ArrayList<EnemyBasic> enemies) {
+    public Entity targetEnemy(ArrayList<Entity> enemies) {
 
         System.out.println("Which enemy will you attack?");
         for (int i = 0; i < enemies.size(); i++) {
             System.out.print((i + 1) + ". " + enemies.get(i).getName() + "  ");
         }
         System.out.println("");
-        EnemyBasic currentEnemy;
+        Entity currentEnemy;
         Scanner scanner = new Scanner(System.in);
-        if (scanner.nextLine() != null) {
-            currentEnemy = enemies.get(scanner.nextInt() - 1);
-        } else {
+        int choice = scanner.nextInt();
+        try {
+            currentEnemy = enemies.get(choice - 1);
+        } catch (Exception e) {
             currentEnemy = enemies.get(0);
         }
-
         return currentEnemy;
     }
 
     public Spell chooseSpell(ArrayList<Spell> spells) {
         System.out.println("Which spell will you use?");
         for (int i = 0; i < spells.size(); i++) {
-            System.out.print((i + 1) + ". " + spells.get(i).getName() + " (" + spells.get(i).getDamage() + " damage, " + spells.get(i).getCost() + " magic)  ");
+            System.out.print((i + 1) + ". " + spells.get(i).getName() + " (" + spells.get(i).getValue() + " value, " + spells.get(i).getCost() + " magic)  ");
         }
         System.out.println("");
         Spell currentSpell;
         Scanner scanner = new Scanner(System.in);
-        if (scanner.nextLine() != null) {
-            currentSpell = spells.get(scanner.nextInt() - 1);
-        } else {
+        int choice = scanner.nextInt();
+        try {
+            currentSpell = spells.get(choice - 1);
+        } catch (Exception e) {
             currentSpell = spells.get(0);
         }
         return currentSpell;
@@ -82,15 +92,16 @@ public class Player extends Entity {
     public Item chooseItem() {
         System.out.println("Which item will you use?");
         for (int i = 0; i < items.size(); i++) {
-            System.out.print((i + 1) + ". " + items.get(i).getName() + " (" + items.get(i).getEffect() + " )  ");
+            System.out.print((i + 1) + ". " + items.get(i).getName() + " (" + items.get(i).getEffect() + ")  ");
         }
         System.out.println("");
         Item currentItem;
         Scanner scanner = new Scanner(System.in);
-        if (scanner.nextLine() != null) {
-            currentItem = items.get(scanner.nextInt() - 1);
-        } else {
-            currentItem = items.get(0);
+        int choice = scanner.nextInt();
+        try {
+            currentItem = items.get(choice - 1);
+        } catch (Exception e) {
+            currentItem = new PotionHP("", 0, null, "");
         }
         return currentItem;
     }
@@ -106,35 +117,35 @@ public class Player extends Entity {
             move(input, room);
         } else {
             System.out.println("You can't see a way out!");
-            return false;
+            return true;
         }
         return true;
     }
 
     public void move(String direction, Room room) {
         int id = room.getId();
-        dungeon[id / 3][id % 3] = room;
+        dungeon[id / 5][id % 5] = room;
         if ("up".equals(direction)) {
             try {
-                currentroom = dungeon[(id / 3) - 1][id % 3];
+                currentRoom = dungeon[(id / 5) - 1][id % 5];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
         } else if ("down".equals(direction)) {
             try {
-                currentroom = dungeon[(id / 3) + 1][id % 3];
+                currentRoom = dungeon[(id / 5) + 1][id % 5];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
         } else if ("left".equals(direction)) {
             try {
-                currentroom = dungeon[id / 3][(id % 3) - 1];
+                currentRoom = dungeon[id / 5][(id % 5) - 1];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
         } else if ("right".equals(direction)) {
             try {
-                currentroom = dungeon[id / 3][(id % 3) + 1];
+                currentRoom = dungeon[id / 5][(id % 5) + 1];
             } catch (Exception e) {
                 System.out.println("There isn't a room there!");
             }
@@ -143,12 +154,42 @@ public class Player extends Entity {
 
     public void loot() {
         Scanner scanner = new Scanner(System.in);
-        for (Item item : currentroom.getLoot()) {
-            System.out.println("You found a " + item.getName());
+        if (currentRoom.getLoot().size() > 0) {
+            for (Item item : currentRoom.getLoot()) {
+                System.out.print("You found a " + item.getName());
+                scanner.nextLine();
+                items.add(item);
+            }
+            currentRoom.getLoot().clear();
+        } else {
+            System.out.println("You found nothing :(");
             scanner.nextLine();
-            items.add(item);
-            currentroom.getLoot().remove(item);
         }
+    }
+
+    public void enemyDefeated(Entity opponent) {
+        Random random = new Random();
+        int luck = random.nextInt(100);
+        System.out.println("You defeated " + opponent.getName());
+        if (40 >= luck) {
+            int index = random.nextInt(opponent.getSpells().size());
+            Spell newSpell = opponent.getSpells().get(index);
+            boolean hasSpell = false;
+            for (Spell spell : spells) {
+                if (spell.getName().equals(newSpell.getName())) {
+                    hasSpell = true;
+                    spell.setValue((int) (spell.getValue() * 1.2));
+                    spell.setCost((int) (spell.getCost() * 1.1));
+                    System.out.println("After defeating " + opponent.getName() + " " + spell.getName() + " became stronger!");
+                    break;
+                }
+            }
+            if (!hasSpell) {
+                System.out.println("After defeating " + opponent.getName() + " you obtained "  + newSpell.getName());
+                spells.add(newSpell);
+            }
+        }
+        currentRoom.getEnemies().remove(opponent);
     }
 }
 

@@ -1,20 +1,20 @@
 package DungeonCrawler;
 
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class Armour extends Item {
 
     private int armourPiece;
 
-    public Armour(String name, int value, Entity user, String effect, int armourPiece) {
+    public Armour(String name, int value, String effect, int armourPiece) {
         this.name = name;
         this.value = value;
-        this.user = user;
         this.effect = effect;
         this.armourPiece = armourPiece;
     }
 
-    public boolean use(Entity user) {
+    public boolean use(Entity user, Entity opponent) {
         Item[] equipment;
         Player player;
         try {
@@ -27,6 +27,7 @@ public class Armour extends Item {
             System.out.println("You have equipped " + name);
             player.getItems().remove(this);
             player.setDefense(player.getDefense() + value);
+            player.setRealDefense(player.getDefense());
             equipment[armourPiece] = this;
             return true;
         } else {
@@ -38,6 +39,7 @@ public class Armour extends Item {
                 player.setDefense(player.getDefense() - equipment[armourPiece].value);
                 player.getItems().remove(this);
                 player.setDefense(player.getDefense() + value);
+                player.setRealDefense(player.getDefense());
                 equipment[armourPiece] = this;
                 return true;
             }

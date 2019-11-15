@@ -1,4 +1,10 @@
 package Arcade;
 
-public class Arcadebox {
+public interface Arcadebox {
+
+    void start();
+
+    void run();
+
+    void stop();
 }
