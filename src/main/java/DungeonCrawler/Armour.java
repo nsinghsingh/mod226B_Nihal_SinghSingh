@@ -36,7 +36,8 @@ public class Armour extends Item {
             String input = scanner.nextLine();
             if (input.equals("yes")) {
                 player.getItems().add(equipment[armourPiece]);
-                player.setDefense(player.getDefense() - equipment[armourPiece].value);
+                player.setDefense(player.getDefense() - equipment[armourPiece].getValue());
+                player.setRealDefense(player.getDefense());
                 player.getItems().remove(this);
                 player.setDefense(player.getDefense() + value);
                 player.setRealDefense(player.getDefense());

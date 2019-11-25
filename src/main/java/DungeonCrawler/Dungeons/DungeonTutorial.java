@@ -53,7 +53,7 @@ public class DungeonTutorial extends Dungeon{
         enemies.put("tutorialSenior", new EnemyBasic(40, 20, 15, "tutorial senior", makeSpellArray(new String[]{"dab"})));
         enemies.put("tutorialChief", new EnemyBasic(60, 30, 20, "tutorial chief", makeSpellArray(new String[]{"banana"})));
         enemies.put("tutorialBoss", new EnemyBasic(80, 40, 25, "tutorial boss", makeSpellArray(new String[]{"slap"})));
-        enemies.put("tutorialPresident", new EnemyBasic(100, 50, 50, "tutorial president", makeSpellArray(new String[]{"influencer"})));
+        enemies.put("tutorialPresident", new EnemyBasic(100, 50, 30, "tutorial president", makeSpellArray(new String[]{"influencer"})));
         enemies.put("tutorialGod", new EnemyBasic(120, 60, 60, "tutorial god", makeSpellArray(new String[]{"blackHole", "godlyInfluencer", "bigHeal", "rest"})));
         return enemies;
     }

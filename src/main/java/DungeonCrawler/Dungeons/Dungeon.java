@@ -1,6 +1,6 @@
 package DungeonCrawler.Dungeons;
 
-import DungeonCrawler.Enemies.*;
+
 import DungeonCrawler.Entity;
 import DungeonCrawler.Item;
 import DungeonCrawler.Room;
@@ -22,7 +22,7 @@ public abstract class Dungeon {
 
     public Room[][] generateDungeon() {
         Random random = new Random();
-        for (int i = 0; i < size*size-1; i++) {
+        for (int i = 0; i < size * size - 1; i++) {
             registerRooms();
             int index;
             if (i / 5 > i % 5) {
@@ -38,7 +38,7 @@ public abstract class Dungeon {
         registerRooms();
         Room bossRoom = rooms.get("final");
         bossRoom.setId(24);
-        dungeon[size-1][size-1] = new Room(bossRoom);
+        dungeon[size - 1][size - 1] = new Room(bossRoom);
         return dungeon;
     }
 
