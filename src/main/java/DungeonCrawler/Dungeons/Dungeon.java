@@ -1,6 +1,5 @@
 package DungeonCrawler.Dungeons;
 
-
 import DungeonCrawler.Entity;
 import DungeonCrawler.Item;
 import DungeonCrawler.Room;

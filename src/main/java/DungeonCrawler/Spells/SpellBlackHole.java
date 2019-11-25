@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class SpellBlackHole extends Spell{
 
     public SpellBlackHole() {
-        super(1, 100, "Be reduced to atoms", "Universal finisher");
+        super(1, 180, "Be reduced to atoms", "Universal finisher");
     }
 
     public SpellBlackHole(int cost, int value, String attackCry, String name) {
