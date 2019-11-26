@@ -10,23 +10,13 @@ public class SpellInfluencer extends Spell{
     private int hits;
 
     public SpellInfluencer() {
-        super(20, 40, "Do you even know who I am?", "Influencer power");
+        super(20, 60, "Do you even know who I am?", "Influencer power");
         this.hits = 4;
     }
 
     public SpellInfluencer(int cost, int value, String attackCry, String name, int hits) {
         super(cost, value, attackCry, name);
         this.hits = hits;
-    }
-
-    public SpellInfluencer(Spell spell) {
-        super(spell);
-        try {
-            hits = ((SpellInfluencer) spell).hits;
-        } catch (Exception e) {
-            hits = 4;
-        }
-
     }
 
     @Override

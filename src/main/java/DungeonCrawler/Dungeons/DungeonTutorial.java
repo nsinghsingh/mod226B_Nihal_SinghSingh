@@ -28,17 +28,18 @@ public class DungeonTutorial extends Dungeon{
         items.put("mp", new PotionMP());
         items.put("def", new PotionDef());
         items.put("blind", new PotionBlind());
-        items.put("steelHelmet", new Armour("Steel helmet", 9, "Adds 9 defense", 0));
+        items.put("steelHelmet", new Armour("Steel helmet", 7, "Adds 9 defense", 0));
         items.put("steelChestplate", new Armour("Steel chestplate", 12, "Adds 12 defense", 1));
         items.put("steelPants", new Armour("Steel pants", 11, "Adds 11 defense", 2));
-        items.put("steelShield", new Armour("Steel shield", 9, "Adds 9 defense", 3));
+        items.put("steelShield", new Armour("Steel shield", 8, "Adds 9 defense", 3));
         return items;
     }
 
     public Map<String, Spell> registerSpells() {
         spells.put("heal", new SpellHeal());
         spells.put("rest", new SpellRest());
-        spells.put("bigHeal", new SpellHeal(16, 45, "You thought you could beat me?", "Big heal"));
+        spells.put("bigRest", new SpellRest(0, 60, "All of that for a drop of blood)", "Big rest"));
+        spells.put("bigHeal", new SpellHeal(16, 55, "You thought you could beat me?", "Big heal"));
         spells.put("godlyInfluencer", new SpellInfluencer(24, 120,  "Do you even know who I am?", "Godly influencer", 3));
         spells.put("dab", new SpellDab());
         spells.put("banana", new SpellBanana());
@@ -54,7 +55,7 @@ public class DungeonTutorial extends Dungeon{
         enemies.put("tutorialChief", new EnemyBasic(60, 30, 20, "tutorial chief", makeSpellArray(new String[]{"banana"})));
         enemies.put("tutorialBoss", new EnemyBasic(80, 40, 25, "tutorial boss", makeSpellArray(new String[]{"slap"})));
         enemies.put("tutorialPresident", new EnemyBasic(100, 50, 30, "tutorial president", makeSpellArray(new String[]{"influencer"})));
-        enemies.put("tutorialGod", new EnemyBasic(120, 60, 60, "tutorial god", makeSpellArray(new String[]{"blackHole", "godlyInfluencer", "bigHeal", "rest"})));
+        enemies.put("tutorialGod", new EnemyBasic(120, 60, 60, "tutorial god", makeSpellArray(new String[]{"blackHole", "godlyInfluencer", "bigHeal", "bigRest"})));
         return enemies;
     }
 
